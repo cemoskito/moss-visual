@@ -1,0 +1,20 @@
+# MOSS Visual — Configuración de rastreo para buscadores
+# Optimizado para Google, Bing y otros crawlers
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Permitir acceso a assets
+Allow: /*.js
+Allow: /*.css
+Allow: /img/
+
+# Directivas de rastreo
+Crawl-delay: 2
+Request-rate: 30/60
+
+# Sitemap
+Sitemap: https://www.mossvisual.com/sitemap.xml
