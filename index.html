@@ -250,6 +250,12 @@
     @media(max-width:768px){.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;background:rgba(9,9,8,.98);padding:1.5rem;gap:1.5rem;border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}.nav-hamburger{display:flex;flex-direction:column}}
     @media(max-width:900px){.diferencial-grid,.form-wrapper{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}.stat-item:nth-child(2){border-right:none}}
     @media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}.stat-item{padding:1.25rem 1rem;border-right:none!important;border-bottom:1px solid var(--border)}.stat-item:nth-child(3),.stat-item:nth-child(4){border-bottom:none}.diferencial-stats{grid-template-columns:1fr 1fr}.form-card{padding:1.75rem 1.25rem}.footer-inner{flex-direction:column;text-align:center}.footer-links{justify-content:center}.logos-grid{gap:1.75rem 2rem}.cta-mid-actions{flex-direction:column;align-items:center}}
+
+    /* STICKY MOBILE CTA — Agente 3 */
+    #stickyCTA{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg-primary);padding:10px 16px;z-index:9999;box-shadow:0 -2px 12px rgba(0,0,0,.35);border-top:1px solid var(--border)}
+    #stickyCTA a{display:flex;align-items:center;justify-content:center;width:100%;padding:13px 20px;background:var(--accent);color:#fff;font-size:.95rem;font-weight:700;text-decoration:none;border-radius:8px;letter-spacing:.01em;transition:background .2s}
+    #stickyCTA a:hover{background:#b8420d}
+    @media(max-width:768px){#stickyCTA{display:block}body{padding-bottom:68px}}
   </style>
 </head>
 <body>
@@ -1037,6 +1043,70 @@
     const obs=new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!started){started=true;step();}},{threshold:.1});
     obs.observe(canvas);
   })();
+</script>
+<!-- STICKY MOBILE CTA — Agente 3 -->
+<div id="stickyCTA">
+  <a href="#diagnostico" aria-label="Solicitar diagnóstico gratuito">
+    Diagnosticar mi visibilidad — gratis →
+  </a>
+</div>
+
+<script>
+/* ── GA4 EVENT TRACKING — Agente 3 ── */
+(function(){
+  if(typeof gtag !== 'function') return;
+
+  /* 1. Form submit */
+  var form = document.getElementById('diagForm');
+  if(form){
+    form.addEventListener('submit', function(){
+      gtag('event','form_submit',{
+        form_name:'diagnostico_gratuito',
+        page_location: window.location.href
+      });
+    });
+  }
+
+  /* 2. CTA clicks */
+  document.querySelectorAll('a[href="#diagnostico"]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      gtag('event','cta_click',{
+        button_text: btn.textContent.trim().substring(0,60),
+        button_location: (btn.closest('section')||{}).id || 'nav'
+      });
+    });
+  });
+
+  /* 3. Sticky CTA click */
+  var stickyCTA = document.getElementById('stickyCTA');
+  if(stickyCTA){
+    stickyCTA.addEventListener('click', function(){
+      gtag('event','cta_click',{button_text:'sticky_mobile_cta', button_location:'sticky'});
+    });
+  }
+
+  /* 4. Scroll depth milestones */
+  var scrollFired = {};
+  window.addEventListener('scroll', function(){
+    var pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+    [25,50,75,90].forEach(function(milestone){
+      if(pct >= milestone && !scrollFired[milestone]){
+        scrollFired[milestone] = true;
+        gtag('event','scroll_depth',{depth_percentage: milestone});
+      }
+    });
+  }, {passive:true});
+
+  /* 5. Ocultar sticky CTA cuando el form es visible */
+  var diagSection = document.getElementById('diagnostico');
+  if(diagSection && stickyCTA){
+    var obs = new IntersectionObserver(function(entries){
+      stickyCTA.style.opacity = entries[0].isIntersecting ? '0' : '1';
+      stickyCTA.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
+    }, {threshold: 0.2});
+    obs.observe(diagSection);
+  }
+})();
 </script>
 </body>
 </html>
