@@ -277,8 +277,8 @@
   .hero-content{position:relative;z-index:2}
 
   /* Word split animation */
-  .word-wrap{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}
-  .word{display:inline-block}
+  .word-wrap{display:inline-block;vertical-align:bottom}
+  .word{display:inline-block;will-change:transform,opacity}
 
   /* Custom cursor — solo puntero fino (desktop) */
   @media(pointer:fine){
@@ -958,7 +958,7 @@
   const heroTL=gsap.timeline({defaults:{ease:'power3.out'}});
   heroTL
     .from('.hero-eyebrow',{opacity:0,y:20,duration:.6})
-    .from('.hero-headline .word',{y:'115%',stagger:.055,duration:.78,ease:'power3.out'},'-=.15')
+    .from('.hero-headline .word',{opacity:0,y:32,stagger:.055,duration:.7,ease:'power2.out'},'-=.15')
     .from('.hero-sub',{opacity:0,y:28,duration:.75},'-=.35')
     .from('.hero-cta',{opacity:0,y:22,scale:.97,duration:.65},'-=.35');
 
