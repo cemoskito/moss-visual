@@ -256,9 +256,57 @@
     #stickyCTA a{display:flex;align-items:center;justify-content:center;width:100%;padding:13px 20px;background:var(--accent);color:#fff;font-size:.95rem;font-weight:700;text-decoration:none;border-radius:8px;letter-spacing:.01em;transition:background .2s}
     #stickyCTA a:hover{background:#b8420d}
     @media(max-width:768px){#stickyCTA{display:block}body{padding-bottom:68px}}
+
+  /* ═══════════════════════════════════════════
+     TRACK E — UX & ANIMACIONES (Fase 3)
+  ═══════════════════════════════════════════ */
+
+  /* Scroll progress bar */
+  #scroll-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:var(--accent);z-index:200;pointer-events:none;box-shadow:0 0 10px rgba(217,78,15,.55),0 0 4px rgba(217,78,15,.3);transition:width .08s linear}
+
+  /* Hero orbs */
+  .hero-orb{position:absolute;border-radius:50%;pointer-events:none;will-change:transform}
+  .hero-orb-1{width:750px;height:750px;background:radial-gradient(circle,rgba(217,78,15,.08) 0%,transparent 65%);top:-220px;right:-180px;animation:orbFloat1 10s ease-in-out infinite}
+  .hero-orb-2{width:550px;height:550px;background:radial-gradient(circle,rgba(217,78,15,.055) 0%,transparent 65%);bottom:-120px;left:-80px;animation:orbFloat2 13s ease-in-out infinite}
+  .hero-orb-3{width:320px;height:320px;background:radial-gradient(circle,rgba(217,78,15,.04) 0%,transparent 65%);top:35%;left:52%;animation:orbFloat3 8s ease-in-out infinite}
+  @keyframes orbFloat1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-35px,50px) scale(1.07)}}
+  @keyframes orbFloat2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,-35px) scale(1.1)}}
+  @keyframes orbFloat3{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(25px,-22px) scale(1.06)}66%{transform:translate(-18px,28px) scale(.96)}}
+
+  /* Hero content z-index */
+  .hero-content{position:relative;z-index:2}
+
+  /* Word split animation */
+  .word-wrap{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}
+  .word{display:inline-block}
+
+  /* Custom cursor — solo puntero fino (desktop) */
+  @media(pointer:fine){
+    body,a,button,.card,.gallery-thumb img{cursor:none!important}
+    .cursor{position:fixed;top:0;left:0;width:24px;height:24px;margin:-12px 0 0 -12px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;will-change:transform;transition:width .2s ease,height .2s ease,border-color .2s ease,background .2s ease}
+    .cursor-dot{position:fixed;top:0;left:0;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;will-change:transform}
+    .cursor.is-hovering{width:48px;height:48px;margin:-24px 0 0 -24px;border-color:rgba(217,78,15,.35);background:rgba(217,78,15,.07)}
+  }
+
+  /* 3D card tilt */
+  .card{transform-style:preserve-3d;will-change:transform}
+
+  /* Problem card accent hover */
+  .problem-card{transition:box-shadow .35s,transform .35s}
+  .problem-card:hover{box-shadow:0 0 0 1px rgba(217,78,15,.3),0 12px 40px rgba(217,78,15,.1)!important;transform:translateY(-4px)}
+
+  /* Nav active link */
+  .nav-links a.nav-active{color:var(--text-primary)!important}
+
+  /* Stat pulse on count */
+  @keyframes statPulse{0%{box-shadow:0 0 0 0 rgba(217,78,15,.25)}70%{box-shadow:0 0 0 14px rgba(217,78,15,0)}100%{box-shadow:0 0 0 0 rgba(217,78,15,0)}}
+  .stat-item.counted{animation:statPulse .9s ease-out forwards}
   </style>
 </head>
 <body>
+<div id="scroll-progress" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
 
 <!-- NAV -->
 <nav id="mainNav">
@@ -276,6 +324,9 @@
 
 <!-- HERO -->
 <section id="hero">
+  <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-3" aria-hidden="true"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Rosario · 25 años de trayectoria nacional e internacional</div>
     <h1 class="hero-headline">Tu cartelería debería estar vendiendo por vos. ¿Está haciendo su trabajo?</h1>
@@ -900,11 +951,15 @@
   hamburger.addEventListener('click',()=>navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
 
+  // Word-split hero headline for staggered reveal
+  const heroH1=document.querySelector('.hero-headline');
+  heroH1.innerHTML=heroH1.textContent.trim().split(/\s+/).map(w=>`<span class="word-wrap"><span class="word">${w}</span></span>`).join(' ');
+
   const heroTL=gsap.timeline({defaults:{ease:'power3.out'}});
   heroTL
     .from('.hero-eyebrow',{opacity:0,y:20,duration:.6})
-    .from('.hero-headline',{opacity:0,y:45,duration:.95},'-=.25')
-    .from('.hero-sub',{opacity:0,y:28,duration:.75},'-=.45')
+    .from('.hero-headline .word',{y:'115%',stagger:.055,duration:.78,ease:'power3.out'},'-=.15')
+    .from('.hero-sub',{opacity:0,y:28,duration:.75},'-=.35')
     .from('.hero-cta',{opacity:0,y:22,scale:.97,duration:.65},'-=.35');
 
   gsap.utils.toArray('[data-animate]').forEach(el=>{
@@ -986,8 +1041,11 @@
     ScrollTrigger.create({trigger:el,start:'top 82%',once:true,
       onEnter:()=>{
         const obj={val:0};
+        const statItem=el.closest('.stat-item');
         gsap.to(obj,{val:target,duration:2,ease:'power2.out',
-          onUpdate:function(){el.textContent=Math.round(obj.val);}});
+          onUpdate:function(){el.textContent=Math.round(obj.val);},
+          onComplete:()=>{if(statItem){statItem.classList.add('counted');setTimeout(()=>statItem.classList.remove('counted'),900);}}
+        });
       }
     });
   });
@@ -1064,6 +1122,72 @@
     const obs=new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!started){started=true;step();}},{threshold:.1});
     obs.observe(canvas);
   })();
+
+  /* ── SCROLL PROGRESS ── */
+  const progressBar=document.getElementById('scroll-progress');
+  window.addEventListener('scroll',()=>{
+    const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
+    progressBar.style.width=Math.min(pct,100)+'%';
+  },{passive:true});
+
+  /* ── CUSTOM CURSOR (solo desktop con puntero fino) ── */
+  if(window.matchMedia('(pointer:fine)').matches){
+    const cur=document.querySelector('.cursor');
+    const curDot=document.querySelector('.cursor-dot');
+    if(cur&&curDot){
+      let firstMove=false;
+      document.addEventListener('mousemove',e=>{
+        if(!firstMove){firstMove=true;gsap.to(cur,{autoAlpha:1,duration:.3});}
+        gsap.to(cur,{x:e.clientX,y:e.clientY,duration:.16,ease:'power2.out',overwrite:true});
+        gsap.set(curDot,{x:e.clientX,y:e.clientY});
+      },{passive:true});
+      document.querySelectorAll('a,button,.card,.gallery-thumb img,[role="button"]').forEach(el=>{
+        el.addEventListener('mouseenter',()=>cur.classList.add('is-hovering'));
+        el.addEventListener('mouseleave',()=>cur.classList.remove('is-hovering'));
+      });
+      gsap.set(cur,{autoAlpha:0});
+    }
+  }
+
+  /* ── CARD 3D TILT (solo dispositivos no táctiles) ── */
+  if(!('ontouchstart' in window)){
+    document.querySelectorAll('.card').forEach(card=>{
+      card.addEventListener('mousemove',e=>{
+        const r=card.getBoundingClientRect();
+        const x=(e.clientX-r.left)/r.width-.5;
+        const y=(e.clientY-r.top)/r.height-.5;
+        gsap.to(card,{rotationY:x*10,rotationX:-y*10,transformPerspective:900,ease:'power2.out',duration:.35,overwrite:true});
+      },{passive:true});
+      card.addEventListener('mouseleave',()=>{
+        gsap.to(card,{rotationY:0,rotationX:0,duration:.65,ease:'elastic.out(1,.75)',overwrite:true});
+      });
+    });
+  }
+
+  /* ── MAGNETIC CTA ── */
+  if(!('ontouchstart' in window)){
+    document.querySelectorAll('.btn-primary').forEach(btn=>{
+      btn.addEventListener('mousemove',e=>{
+        const r=btn.getBoundingClientRect();
+        gsap.to(btn,{x:(e.clientX-r.left-r.width/2)*.22,y:(e.clientY-r.top-r.height/2)*.22,duration:.35,ease:'power2.out',overwrite:true});
+      },{passive:true});
+      btn.addEventListener('mouseleave',()=>{
+        gsap.to(btn,{x:0,y:0,duration:.55,ease:'elastic.out(1,.75)',overwrite:true});
+      });
+    });
+  }
+
+  /* ── NAV ACTIVE SECTION ── */
+  const allSections=document.querySelectorAll('section[id]');
+  const navAnchors=document.querySelectorAll('.nav-links a[href^="#"]');
+  ScrollTrigger.create({
+    start:0,end:99999,
+    onUpdate:()=>{
+      let cur='';
+      allSections.forEach(s=>{if(s.getBoundingClientRect().top<window.innerHeight*.55)cur=s.id;});
+      navAnchors.forEach(a=>a.classList.toggle('nav-active',a.getAttribute('href')==='#'+cur));
+    }
+  });
 </script>
 <!-- STICKY MOBILE CTA — Agente 3 -->
 <div id="stickyCTA">
