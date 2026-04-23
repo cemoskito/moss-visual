@@ -280,12 +280,12 @@
   .word-wrap{display:inline-block;vertical-align:bottom}
   .word{display:inline-block;will-change:transform,opacity}
 
-  /* Custom cursor — solo puntero fino (desktop) */
+  /* Custom cursor — flecha naranja con glow (solo puntero fino desktop) */
   @media(pointer:fine){
-    body,a,button,.card,.gallery-thumb img{cursor:none!important}
-    .cursor{position:fixed;top:0;left:0;width:24px;height:24px;margin:-12px 0 0 -12px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;will-change:transform;transition:width .2s ease,height .2s ease,border-color .2s ease,background .2s ease}
-    .cursor-dot{position:fixed;top:0;left:0;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;will-change:transform}
-    .cursor.is-hovering{width:48px;height:48px;margin:-24px 0 0 -24px;border-color:rgba(217,78,15,.35);background:rgba(217,78,15,.07)}
+    /* Flecha SVG naranja como cursor base */
+    body{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cfilter id='g'%3E%3CfeGaussianBlur stdDeviation='1.5' result='b'/%3E%3CfeMerge%3E%3CfeMergeNode in='b'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3Cpath filter='url(%23g)' d='M4 2 L4 18 L8.5 13.5 L12 20 L14 19 L10.5 12.5 L16 12.5 Z' fill='%23f4f2ee' stroke='%23d94e0f' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2,auto!important}
+    /* En hover de interactivos: flecha naranja más brillante con glow reforzado */
+    a,button,.card,.gallery-thumb img,[role='button'],.faq-question,.gallery-toggle{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cfilter id='g'%3E%3CfeGaussianBlur stdDeviation='2.5' result='b'/%3E%3CfeMerge%3E%3CfeMergeNode in='b'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3Cpath filter='url(%23g)' d='M5 2 L5 20 L10 15 L14 22 L16.5 21 L12.5 14 L19 14 Z' fill='%23d94e0f' stroke='%23ff7a3d' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E") 5 2,pointer!important}
   }
 
   /* 3D card tilt */
@@ -301,12 +301,24 @@
   /* Stat pulse on count */
   @keyframes statPulse{0%{box-shadow:0 0 0 0 rgba(217,78,15,.25)}70%{box-shadow:0 0 0 14px rgba(217,78,15,0)}100%{box-shadow:0 0 0 0 rgba(217,78,15,0)}}
   .stat-item.counted{animation:statPulse .9s ease-out forwards}
+
+  /* FAQ Accordion */
+  .faq-item{border-bottom:1px solid var(--border)}
+  .faq-item:first-child{border-top:1px solid var(--border)}
+  .faq-question{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1.375rem 0;cursor:pointer;list-style:none;user-select:none}
+  .faq-question::-webkit-details-marker{display:none}
+  .faq-question h3{font-size:1.05rem;font-weight:700;color:var(--text-primary);margin:0;line-height:1.4;flex:1;transition:color .2s}
+  .faq-item:hover .faq-question h3{color:var(--accent)}
+  .faq-icon{width:28px;height:28px;min-width:28px;border-radius:50%;border:1.5px solid var(--border-warm);display:flex;align-items:center;justify-content:center;transition:border-color .25s,background .25s,transform .35s}
+  .faq-icon svg{stroke:var(--text-muted);transition:stroke .25s}
+  .faq-item.is-open .faq-icon{border-color:var(--accent);background:rgba(217,78,15,.08);transform:rotate(45deg)}
+  .faq-item.is-open .faq-icon svg{stroke:var(--accent)}
+  .faq-answer{overflow:hidden;height:0}
+  .faq-answer p{color:var(--text-sec);line-height:1.75;padding-bottom:1.375rem;margin:0}
   </style>
 </head>
 <body>
 <div id="scroll-progress" aria-hidden="true"></div>
-<div class="cursor" aria-hidden="true"></div>
-<div class="cursor-dot" aria-hidden="true"></div>
 
 <!-- NAV -->
 <nav id="mainNav">
@@ -792,43 +804,80 @@
   <div class="container">
     <div class="section-eyebrow" data-animate>Preguntas frecuentes</div>
     <h2 class="section-title" data-animate>¿Qué querés saber sobre cartelería y señalética en Rosario?</h2>
-    <div style="max-width:800px;margin:3rem auto 0">
-      <div style="margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)" data-animate>
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--text-primary)">¿Cuánto tiempo tarda en realizarse un proyecto de cartelería?</h3>
-        <p style="color:var(--text-sec);line-height:1.7">Los plazos dependen de la complejidad del proyecto. Para un presupuesto inicial te respondemos en 24hs hábiles. La ejecución varía: cartelería luminosa simple entre 1-2 semanas, fachadas comerciales 3-6 semanas. En MOSS Visual planificamos cada etapa para cumplir en tiempo sin comprometer calidad.</p>
+    <div style="max-width:800px;margin:3rem auto 0" data-animate id="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>¿Cuánto tiempo tarda en realizarse un proyecto de cartelería?</h3>
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+        </div>
+        <div class="faq-answer"><p>Los plazos dependen de la complejidad del proyecto. Para un presupuesto inicial te respondemos en 24hs hábiles. La ejecución varía: cartelería luminosa simple entre 1-2 semanas, fachadas comerciales 3-6 semanas. En MOSS Visual planificamos cada etapa para cumplir en tiempo sin comprometer calidad.</p></div>
       </div>
-      <div style="margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)" data-animate data-delay="0.08">
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--text-primary)">¿Qué incluye el diagnóstico gratuito?</h3>
-        <p style="color:var(--text-sec);line-height:1.7">El diagnóstico es un análisis detallado de tu cartelería y fachada actual. Incluye: evaluación de visibilidad y legibilidad, análisis de impacto visual, identificación de problemas estructurales, recomendaciones de mejora concretas y un presupuesto orientativo si aplica. Todo sin cargo ni compromiso.</p>
+
+      <div class="faq-item is-open">
+        <div class="faq-question">
+          <h3>¿Qué incluye el diagnóstico gratuito?</h3>
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+        </div>
+        <div class="faq-answer"><p>El diagnóstico es un análisis detallado de tu cartelería y fachada actual. Incluye: evaluación de visibilidad y legibilidad, análisis de impacto visual, identificación de problemas estructurales, recomendaciones de mejora concretas y un presupuesto orientativo si aplica. Todo sin cargo ni compromiso.</p></div>
       </div>
-      <div style="margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)" data-animate data-delay="0.16">
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--text-primary)">¿Ofrecen mantenimiento de cartelería?</h3>
-        <p style="color:var(--text-sec);line-height:1.7">Sí. Ofrecemos planes de mantenimiento preventivo para asegurar que tu cartelería se mantiene en óptimas condiciones. Esto incluye limpieza, reparaciones menores, cambio de componentes desgastados y revisiones periódicas. El mantenimiento preventivo alarga la vida útil de tu inversión.</p>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>¿Ofrecen mantenimiento de cartelería?</h3>
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+        </div>
+        <div class="faq-answer"><p>Sí. Ofrecemos planes de mantenimiento preventivo para asegurar que tu cartelería se mantiene en óptimas condiciones. Esto incluye limpieza, reparaciones menores, cambio de componentes desgastados y revisiones periódicas. El mantenimiento preventivo alarga la vida útil de tu inversión.</p></div>
       </div>
-      <div style="margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)" data-animate data-delay="0.24">
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--text-primary)">¿Trabajan fuera de Rosario?</h3>
-        <p style="color:var(--text-sec);line-height:1.7">Sí. Somos base Rosario pero trabajamos en toda la provincia de Santa Fe y otras provincias. Además, tenemos experiencia con proyectos internacionales en Brasil, Alemania y Dubái. Consultá por tu ubicación específica.</p>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>¿Trabajan fuera de Rosario?</h3>
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+        </div>
+        <div class="faq-answer"><p>Sí. Somos base Rosario pero trabajamos en toda la provincia de Santa Fe y otras provincias. Además, tenemos experiencia con proyectos internacionales en Brasil, Alemania y Dubái. Consultá por tu ubicación específica.</p></div>
       </div>
-      <div style="margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)" data-animate data-delay="0.32">
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--text-primary)">¿Qué diferencia a MOSS Visual de otros proveedores?</h3>
-        <p style="color:var(--text-sec);line-height:1.7">El diagnóstico gratuito — ningún otro proveedor en Rosario lo hace. Antes de cotizarte nada, analizamos tu visibilidad actual y te decimos exactamente qué está limitando tu negocio. Después, fabricamos la solución en nuestro propio taller (100% sin intermediarios), con 25 años de trayectoria que avalan cada proyecto.</p>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>¿Qué diferencia a MOSS Visual de otros proveedores?</h3>
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+        </div>
+        <div class="faq-answer"><p>El diagnóstico gratuito — ningún otro proveedor en Rosario lo hace. Antes de cotizarte nada, analizamos tu visibilidad actual y te decimos exactamente qué está limitando tu negocio. Después, fabricamos la solución en nuestro propio taller (100% sin intermediarios), con 25 años de trayectoria que avalan cada proyecto.</p></div>
       </div>
-      <div style="margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)" data-animate data-delay="0.40">
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--text-primary)">¿Atienden en Funes, Roldán y el Gran Rosario?</h3>
-        <p style="color:var(--text-sec);line-height:1.7">Sí. Trabajamos en toda el área metropolitana de Rosario: Funes, Roldán, Pérez, Villa Gobernador Gálvez, San Lorenzo, Granadero Baigorria y más. El diagnóstico inicial lo hacemos sin que tengas que venir al taller — mandás fotos de tu local y te devolvemos el análisis por WhatsApp en menos de 24hs hábiles.</p>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>¿Atienden en Funes, Roldán y el Gran Rosario?</h3>
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+        </div>
+        <div class="faq-answer"><p>Sí. Trabajamos en toda el área metropolitana de Rosario: Funes, Roldán, Pérez, Villa Gobernador Gálvez, San Lorenzo, Granadero Baigorria y más. El diagnóstico inicial lo hacemos sin que tengas que venir al taller — mandás fotos de tu local y te devolvemos el análisis por WhatsApp en menos de 24hs hábiles.</p></div>
       </div>
-      <div style="margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)" data-animate data-delay="0.48">
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--text-primary)">¿Cuánto demora un ploteo vehicular en Rosario?</h3>
-        <p style="color:var(--text-sec);line-height:1.7">Un ploteo vehicular completo tarda entre 2 y 5 días hábiles desde que aprobás el diseño final, dependiendo de la complejidad del vehículo y la cantidad de materiales. Al fabricar en nuestro propio taller en Rosario, no dependemos de proveedores externos — controlamos los tiempos de principio a fin. Muchos ploteos simples los entregamos en 48hs.</p>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>¿Cuánto demora un ploteo vehicular en Rosario?</h3>
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+        </div>
+        <div class="faq-answer"><p>Un ploteo vehicular completo tarda entre 2 y 5 días hábiles desde que aprobás el diseño final, dependiendo de la complejidad del vehículo y la cantidad de materiales. Al fabricar en nuestro propio taller en Rosario, no dependemos de proveedores externos — controlamos los tiempos de principio a fin. Muchos ploteos simples los entregamos en 48hs.</p></div>
       </div>
-      <div style="margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)" data-animate data-delay="0.56">
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--text-primary)">¿Tienen taller propio de fabricación en Rosario?</h3>
-        <p style="color:var(--text-sec);line-height:1.7">Sí, fabricamos 100% en nuestro taller en Rosario. No somos intermediarios ni revendedores de otros proveedores. Diseño, corte, impresión, fabricación e instalación los hacemos nosotros mismos — eso nos da control total de la calidad y los plazos. Es una de las razones por las que llevamos 25 años trabajando con los mismos clientes.</p>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>¿Tienen taller propio de fabricación en Rosario?</h3>
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+        </div>
+        <div class="faq-answer"><p>Sí, fabricamos 100% en nuestro taller en Rosario. No somos intermediarios ni revendedores de otros proveedores. Diseño, corte, impresión, fabricación e instalación los hacemos nosotros mismos — eso nos da control total de la calidad y los plazos. Es una de las razones por las que llevamos 25 años trabajando con los mismos clientes.</p></div>
       </div>
-      <div style="padding-bottom:2rem" data-animate data-delay="0.64">
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--text-primary)">¿Cuál es el rango de precios de los servicios?</h3>
-        <p style="color:var(--text-sec);line-height:1.7">El costo de un proyecto de comunicación visual depende del alcance, materiales y complejidad. Una cartelería luminosa simple pequeña puede costar desde $500 USD, mientras que una transformación de fachada integral puede ser significativamente mayor. Por eso ofrecemos diagnóstico gratuito: te decimos exactamente qué necesitás y cuánto representaría.</p>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>¿Cuál es el rango de precios de los servicios?</h3>
+          <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+        </div>
+        <div class="faq-answer"><p>El costo de un proyecto de comunicación visual depende del alcance, materiales y complejidad. Una cartelería luminosa simple pequeña puede costar desde $500 USD, mientras que una transformación de fachada integral puede ser significativamente mayor. Por eso ofrecemos diagnóstico gratuito: te decimos exactamente qué necesitás y cuánto representaría.</p></div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1142,24 +1191,7 @@
     progressBar.style.width=Math.min(pct,100)+'%';
   },{passive:true});
 
-  /* ── CUSTOM CURSOR (solo desktop con puntero fino) ── */
-  if(window.matchMedia('(pointer:fine)').matches){
-    const cur=document.querySelector('.cursor');
-    const curDot=document.querySelector('.cursor-dot');
-    if(cur&&curDot){
-      let firstMove=false;
-      document.addEventListener('mousemove',e=>{
-        if(!firstMove){firstMove=true;gsap.to(cur,{autoAlpha:1,duration:.3});}
-        gsap.to(cur,{x:e.clientX,y:e.clientY,duration:.16,ease:'power2.out',overwrite:true});
-        gsap.set(curDot,{x:e.clientX,y:e.clientY});
-      },{passive:true});
-      document.querySelectorAll('a,button,.card,.gallery-thumb img,[role="button"]').forEach(el=>{
-        el.addEventListener('mouseenter',()=>cur.classList.add('is-hovering'));
-        el.addEventListener('mouseleave',()=>cur.classList.remove('is-hovering'));
-      });
-      gsap.set(cur,{autoAlpha:0});
-    }
-  }
+  /* ── CUSTOM CURSOR ── cursor SVG naranja vía CSS, sin overlay JS ── */
 
   /* ── CARD 3D TILT (solo dispositivos no táctiles) ── */
   if(!('ontouchstart' in window)){
@@ -1200,6 +1232,49 @@
       navAnchors.forEach(a=>a.classList.toggle('nav-active',a.getAttribute('href')==='#'+cur));
     }
   });
+
+  /* ── FAQ ACCORDION ── */
+  (function(){
+    const items=document.querySelectorAll('.faq-item');
+    // Initialise heights: open item → auto, rest → 0
+    items.forEach(item=>{
+      const answer=item.querySelector('.faq-answer');
+      if(item.classList.contains('is-open')){
+        gsap.set(answer,{height:'auto'});
+      } else {
+        gsap.set(answer,{height:0});
+      }
+    });
+    items.forEach(item=>{
+      const btn=item.querySelector('.faq-question');
+      btn.setAttribute('role','button');
+      btn.setAttribute('tabindex','0');
+      btn.setAttribute('aria-expanded',item.classList.contains('is-open')?'true':'false');
+      function toggle(){
+        const isOpen=item.classList.contains('is-open');
+        // Close all
+        items.forEach(i=>{
+          if(i===item) return;
+          i.classList.remove('is-open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded','false');
+          gsap.to(i.querySelector('.faq-answer'),{height:0,duration:.32,ease:'power2.inOut'});
+        });
+        // Toggle current
+        if(isOpen){
+          item.classList.remove('is-open');
+          btn.setAttribute('aria-expanded','false');
+          gsap.to(answer,{height:0,duration:.32,ease:'power2.inOut'});
+        } else {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded','true');
+          gsap.to(answer,{height:'auto',duration:.38,ease:'power2.out'});
+        }
+      }
+      const answer=item.querySelector('.faq-answer');
+      btn.addEventListener('click',toggle);
+      btn.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+    });
+  })();
 </script>
 <!-- STICKY MOBILE CTA — Agente 3 -->
 <div id="stickyCTA">
