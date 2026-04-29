@@ -26,5 +26,5 @@
 # ===== NORMALIZAR TRAILING SLASHES =====
 /(.*)/$               /$1                  301
 
-# ===== FALLBACK - Mantener assets y rutas SPA funcionando =====
-/*                    /:splat              200
+# ===== FALLBACK - SPA catch-all: siempre sirve index.html =====
+/*                    /index.html          200
