@@ -17,4 +17,4 @@ Crawl-delay: 2
 Request-rate: 30/60
 
 # Sitemap
-Sitemap: https://www.mossvisual.com/sitemap.xml
+Sitemap: https://mossvisual.com/sitemap.xml
