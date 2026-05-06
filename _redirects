@@ -1,30 +1,27 @@
 # MOSS Visual — Redirecciones 301 Netlify
-# Fase 2: Migración de URLs antiguas a nueva estructura single-page
-# Mapeo de GSC Coverage: URLs indexadas → secciones correspondientes
-# Creado: 2026-04-21
+# Actualizado: 2026-05-06
+# Cambios: eliminados redirects a hash fragments (causaban cadenas y contaminación en GSC)
+#          service redirects apuntan ahora a landing pages dedicadas
 
-# ===== REDIRECCIONES DE PAGINAS NO INDEXADAS (404s) =====
-/contact              /#contacto           301
+# ===== PATHS VIEJOS → HOMEPAGE =====
+/contact              /                    301
 /home                 /                    301
 /mossvisual           /                    301
-/about                /#agencia            301
+/about                /                    301
 /localscan            /                    301
-/planes               /#servicios          301
+/planes               /                    301
+/contacto             /                    301
+/nosotros             /                    301
 
-# ===== REDIRECCIONES DE SERVICIOS ANTIGUOS =====
-# Todas las páginas de servicios antiguas redirigen a la sección servicios
-/letras-corporeas     /#servicios          301
-/fachadas-comerciales /#servicios          301
-/carteleria-luminosa  /#servicios          301
-/senaletica           /#servicios          301
-/ploteo-vehicular     /#servicios          301
-
-# ===== REDIRECCIONES DE PAGINAS INDEXADAS =====
-/contacto             /#contacto           301
-/nosotros             /#agencia            301
+# ===== SERVICIOS VIEJOS → LANDING PAGES =====
+/letras-corporeas     /letras-corporeas-rosario/     301
+/fachadas-comerciales /fachadas-comerciales-rosario/ 301
+/carteleria-luminosa  /carteleria-luminosa-rosario/  301
+/senaletica           /senaletica-rosario/           301
+/ploteo-vehicular     /ploteo-vehicular-rosario/     301
 
 # ===== NORMALIZAR TRAILING SLASHES =====
 /(.*)/$               /$1                  301
 
-# ===== FALLBACK - SPA catch-all: siempre sirve index.html =====
+# ===== FALLBACK SPA =====
 /*                    /index.html          200
