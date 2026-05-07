@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -44,9 +44,10 @@
   <style>
     :root{--bg-primary:#090908;--bg-secondary:#0f0e0d;--bg-tertiary:#161412;--bg-elevated:#1e1b18;--bg-warm:#120f0d;--accent:#D94E0F;--accent-hover:#b83d0a;--accent-glow:rgba(217,78,15,.20);--accent-sub:rgba(217,78,15,.08);--accent-ring:rgba(217,78,15,.25);--text-primary:#f4f2ee;--text-sec:#a89f94;--text-muted:#5c554d;--border:rgba(244,242,238,.08);--border-warm:rgba(244,242,238,.14);--ring:rgba(244,242,238,.06)}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    @media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
     body{background:var(--bg-primary);color:var(--text-primary);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
     [data-animate]{opacity:0}
+    @media(prefers-reduced-motion:reduce){[data-animate]{opacity:1!important;transform:none!important}}
     .container{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,5vw,4rem)}
 
     /* NAV */
@@ -57,7 +58,6 @@
     .nav-links{display:flex;align-items:center;gap:2rem}
     .nav-links a{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-sec);text-decoration:none;transition:color .2s}
     .nav-links a:hover{color:var(--text-primary)}
-    /* FIX 1: nav-cta texto blanco con mayor especificidad */
     .nav-links a.nav-cta,.nav-cta{background:var(--accent);color:#fff!important;font-size:.85rem;font-weight:700;letter-spacing:.02em;padding:.65rem 1.4rem;border-radius:6px;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;text-transform:none}
     .nav-links a.nav-cta:hover,.nav-cta:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 6px 20px var(--accent-glow);color:#fff!important}
     .nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
@@ -215,8 +215,7 @@
     #diagnostico{padding:clamp(4rem,8vw,8rem) clamp(1rem,5vw,4rem);background:radial-gradient(ellipse 60% 80% at 30% 50%,rgba(217,78,15,.05) 0%,transparent 70%),var(--bg-primary)}
     .form-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,6rem);align-items:start}
 
-    /* FIX 6: loss aversion sin emoji, con borde naranja */
-    .loss-aversion-block{display:flex;align-items:center;gap:.875rem;background:rgba(217,78,15,.07);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:.875rem 1.1rem;margin-bottom:1.5rem}
+    .loss-aversion-block{display:flex;align-items:center;gap:.875rem;background:var(--accent-sub);border:1px solid var(--accent-ring);border-radius:8px;padding:.875rem 1.1rem;margin-bottom:1.5rem}
     .loss-aversion-block p{font-size:.88rem;font-weight:600;color:var(--accent);line-height:1.45;margin:0}
 
     .form-left .section-eyebrow{margin-bottom:.75rem}
@@ -233,7 +232,6 @@
     .field{width:100%;padding:.875rem 1.125rem;background:var(--bg-tertiary);border:1px solid var(--border-warm);border-radius:8px;color:var(--text-primary);font-size:.95rem;font-family:'Inter',sans-serif;transition:border-color .2s,box-shadow .2s;outline:none;-webkit-appearance:none;appearance:none}
     .field:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(217,78,15,.1)}
     .field::placeholder{color:var(--text-muted)}
-    /* FIX 7: select placeholder same muted color */
     select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235c554d' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1.125rem center;padding-right:2.5rem;color:var(--text-muted)}
     select.field.has-value{color:var(--text-primary)}
     select.field option{background:#161412;color:var(--text-primary)}
@@ -329,7 +327,10 @@
   .faq-item.is-open .faq-icon svg{stroke:var(--accent)}
   .faq-answer{overflow:hidden;height:0}
   .faq-answer p{color:var(--text-sec);line-height:1.75;padding-bottom:1.375rem;margin:0}
-  </style>
+  @media(max-width:768px){.nav-links.open a:not(.nav-cta){padding:.75rem 0;display:block}.nav-links.open .nav-cta{padding:.875rem 1.4rem;display:block;text-align:center}}
+    @media(max-width:768px){.field{font-size:1rem}}
+    .btn-primary:focus-visible,.btn-ghost:focus-visible,.form-submit:focus-visible,.nav-links a:focus-visible,.nav-cta:focus-visible,.nav-hamburger:focus-visible,.faq-question:focus-visible,.gallery-toggle:focus-visible,.lb-nav:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+    </style>
 </head>
 <body>
 <div id="scroll-progress" aria-hidden="true"></div>
@@ -343,11 +344,12 @@
     <a href="#testimonios">Clientes</a>
     <a href="#diagnostico" class="nav-cta">Diagnóstico gratuito →</a>
   </div>
-  <button class="nav-hamburger" id="hamburger" aria-label="Menú">
+  <button class="nav-hamburger" id="hamburger" aria-label="Menú" aria-expanded="false" aria-controls="navLinks">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
+<main>
 <!-- HERO -->
 <section id="hero">
   <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
@@ -985,6 +987,8 @@
 </section>
 
 <!-- FOOTER — FIX 8 email / FIX 9 teléfono -->
+</main>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">MOSS<span>Visual</span></div>
@@ -1030,7 +1034,7 @@
 
   const hamburger=document.getElementById('hamburger');
   const navLinks=document.getElementById('navLinks');
-  hamburger.addEventListener('click',()=>navLinks.classList.toggle('open'));
+  hamburger.addEventListener('click',()=>{const o=navLinks.classList.toggle('open');hamburger.setAttribute('aria-expanded',o);});
   navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
 
   // Word-split hero headline for staggered reveal

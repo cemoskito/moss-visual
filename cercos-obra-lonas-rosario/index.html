@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -42,9 +42,10 @@
   <style>
     :root{--bg-primary:#090908;--bg-secondary:#0f0e0d;--bg-tertiary:#161412;--bg-elevated:#1e1b18;--bg-warm:#120f0d;--accent:#D94E0F;--accent-hover:#b83d0a;--accent-glow:rgba(217,78,15,.20);--accent-sub:rgba(217,78,15,.08);--accent-ring:rgba(217,78,15,.25);--text-primary:#f4f2ee;--text-sec:#a89f94;--text-muted:#5c554d;--border:rgba(244,242,238,.08);--border-warm:rgba(244,242,238,.14);--ring:rgba(244,242,238,.06)}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    @media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
     body{background:var(--bg-primary);color:var(--text-primary);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
     [data-animate]{opacity:0}
+    @media(prefers-reduced-motion:reduce){[data-animate]{opacity:1!important;transform:none!important}}
     .container{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,5vw,4rem)}
     nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1rem,5vw,4rem);background:rgba(9,9,8,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:background .3s}
     nav.scrolled{background:rgba(9,9,8,.97)}
@@ -70,7 +71,7 @@
     .section-divider{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--border-warm) 30%,var(--border-warm) 70%,transparent)}
     #diagnostico{padding:clamp(4rem,8vw,8rem) clamp(1rem,5vw,4rem);background:radial-gradient(ellipse 60% 80% at 30% 50%,rgba(217,78,15,.05) 0%,transparent 70%),var(--bg-primary)}
     .form-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,6rem);align-items:start}
-    .loss-aversion-block{display:flex;align-items:center;gap:.875rem;background:rgba(217,78,15,.07);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:.875rem 1.1rem;margin-bottom:1.5rem}
+    .loss-aversion-block{display:flex;align-items:center;gap:.875rem;background:var(--accent-sub);border:1px solid var(--accent-ring);border-radius:8px;padding:.875rem 1.1rem;margin-bottom:1.5rem}
     .loss-aversion-block p{font-size:.88rem;font-weight:600;color:var(--accent);line-height:1.45;margin:0}
     .form-left .section-eyebrow{margin-bottom:.75rem}
     .form-left h2{font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:1.25rem}
@@ -154,7 +155,10 @@
     .step-num{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:900;color:var(--accent);opacity:.6;line-height:1;margin-bottom:.75rem}
     .process-step h3{font-size:.95rem;font-weight:700;margin-bottom:.4rem}
     .process-step p{font-size:.85rem;color:var(--text-sec);line-height:1.6}
-  </style>
+  @media(max-width:768px){.nav-links.open a:not(.nav-cta){padding:.75rem 0;display:block}.nav-links.open .nav-cta{padding:.875rem 1.4rem;display:block;text-align:center}}
+    @media(max-width:768px){.field{font-size:1rem}}
+    .btn-primary:focus-visible,.btn-ghost:focus-visible,.form-submit:focus-visible,.nav-links a:focus-visible,.nav-cta:focus-visible,.nav-hamburger:focus-visible,.faq-question:focus-visible,.gallery-toggle:focus-visible,.lb-nav:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+    </style>
 </head>
 <body>
 
@@ -168,13 +172,14 @@
     <a href="/#testimonios">Clientes</a>
     <a href="/#diagnostico" class="nav-cta">Diagnóstico gratuito →</a>
   </div>
-  <button class="nav-hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menú" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="breadcrumb">
   <a href="/">Inicio</a> <span>›</span> <span>Cercos de Obra y Lonas para Constructoras · Rosario</span>
 </div>
 
+<main>
 <section class="service-hero">
   <div class="container">
     <div class="service-hero-badge">Gran formato · Lonas · Cercos · Publicidad en obra</div>
@@ -230,20 +235,24 @@
   <div class="section-eyebrow" data-animate>¿Para quién es este servicio?</div>
   <h2 class="section-title" data-animate>Trabajamos con constructoras, desarrolladoras y estudios de arquitectura</h2>
   <p style="color:var(--text-sec);max-width:65ch;margin-bottom:2.5rem;line-height:1.8;font-size:.975rem" data-animate>Nuestros clientes habituales son empresas con proyectos de mediana y gran escala que entienden que el cerco de obra no es un gasto operativo: es publicidad en vía pública con metros cuadrados reales.</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem">
-    <div style="background:var(--bg-secondary);border-radius:12px;padding:1.5rem;box-shadow:0 0 0 1px var(--ring)" data-animate>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2.5rem;margin-top:1.5rem">
+    <div data-animate>
+      <div class="step-num">01</div>
       <h3 style="font-size:.95rem;font-weight:700;margin-bottom:.4rem">Constructoras</h3>
       <p style="font-size:.85rem;color:var(--text-sec);line-height:1.6">Obras de larga duración. Publicidad permanente durante toda la construcción del edificio.</p>
     </div>
-    <div style="background:var(--bg-secondary);border-radius:12px;padding:1.5rem;box-shadow:0 0 0 1px var(--ring)" data-animate data-delay="0.05">
+    <div data-animate data-delay="0.05">
+      <div class="step-num">02</div>
       <h3 style="font-size:.95rem;font-weight:700;margin-bottom:.4rem">Desarrolladoras inmobiliarias</h3>
       <p style="font-size:.85rem;color:var(--text-sec);line-height:1.6">El cerco es el primer contacto con el comprador. Diseñamos para vender, no solo para cubrir.</p>
     </div>
-    <div style="background:var(--bg-secondary);border-radius:12px;padding:1.5rem;box-shadow:0 0 0 1px var(--ring)" data-animate data-delay="0.1">
+    <div data-animate data-delay="0.1">
+      <div class="step-num">03</div>
       <h3 style="font-size:.95rem;font-weight:700;margin-bottom:.4rem">Estudios de arquitectura</h3>
       <p style="font-size:.85rem;color:var(--text-sec);line-height:1.6">Ejecutamos el proyecto gráfico con la precisión que una obra de diseño requiere. Sin improvisaciones.</p>
     </div>
-    <div style="background:var(--bg-secondary);border-radius:12px;padding:1.5rem;box-shadow:0 0 0 1px var(--ring)" data-animate data-delay="0.15">
+    <div data-animate data-delay="0.15">
+      <div class="step-num">04</div>
       <h3 style="font-size:.95rem;font-weight:700;margin-bottom:.4rem">Grupos inversores</h3>
       <p style="font-size:.85rem;color:var(--text-sec);line-height:1.6">Proyectos donde la imagen del emprendimiento es un activo. El cerco comunica el valor del proyecto antes de que exista.</p>
     </div>
@@ -301,11 +310,11 @@
   <h2 class="section-title" data-animate>Preguntas sobre cercos y lonas de obra en Rosario</h2>
   <div style="max-width:780px;margin-top:2rem">
     <div class="faq-item">
-      <div class="faq-question" role="button" tabindex="0"><h3>¿Qué es una lona microperforada para cercos de obra?</h3><div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false"><h3>¿Qué es una lona microperforada para cercos de obra?</h3><div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
       <div class="faq-answer"><p>Es una lona de PVC con micro-perforaciones que permiten el paso del aire y la visión desde adentro, pero desde afuera se ve como una impresión sólida de alta calidad. Son la solución ideal para cercos de obra porque resisten el viento y las condiciones climáticas de Rosario.</p></div>
     </div>
     <div class="faq-item">
-      <div class="faq-question" role="button" tabindex="0"><h3>¿Cuánto mide una lona de cerco de obra típica?</h3><div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false"><h3>¿Cuánto mide una lona de cerco de obra típica?</h3><div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
       <div class="faq-answer"><p>Fabricamos a medida del cerco, sin límites de tamaño. La visita técnica sin cargo es el primer paso: medimos, relevamos la obra y presupuestamos con precisión según tus necesidades.</p></div>
     </div>
   </div>
@@ -365,6 +374,8 @@
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">MOSS<span>Visual</span></div>
@@ -379,10 +390,28 @@
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.create({start:80,onEnter:()=>document.getElementById('mainNav').classList.add('scrolled'),onLeaveBack:()=>document.getElementById('mainNav').classList.remove('scrolled')});
 const hamburger=document.getElementById('hamburger');const navLinks=document.getElementById('navLinks');
-hamburger.addEventListener('click',()=>navLinks.classList.toggle('open'));
+hamburger.addEventListener('click',()=>{const o=navLinks.classList.toggle('open');hamburger.setAttribute('aria-expanded',o);});
 navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
 gsap.utils.toArray('[data-animate]').forEach(el=>{const d=parseFloat(el.dataset.delay)||0;gsap.fromTo(el,{opacity:0,y:30},{opacity:1,y:0,duration:.7,ease:'power2.out',delay:d,scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'}});});
-document.querySelectorAll('.faq-question').forEach(btn=>{btn.addEventListener('click',function(){const item=this.closest('.faq-item');const isOpen=item.classList.contains('is-open');document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('is-open');i.querySelector('.faq-answer').style.height='0';});if(!isOpen){item.classList.add('is-open');const ans=item.querySelector('.faq-answer');ans.style.height=ans.scrollHeight+'px';}});});
+document.querySelectorAll('.faq-question').forEach(btn=>{
+  function toggle(){
+    const item=btn.closest('.faq-item');
+    const isOpen=item.classList.contains('is-open');
+    document.querySelectorAll('.faq-item').forEach(i=>{
+      i.classList.remove('is-open');
+      i.querySelector('.faq-answer').style.height='0';
+      i.querySelector('.faq-question').setAttribute('aria-expanded','false');
+    });
+    if(!isOpen){
+      item.classList.add('is-open');
+      const ans=item.querySelector('.faq-answer');
+      ans.style.height=ans.scrollHeight+'px';
+      btn.setAttribute('aria-expanded','true');
+    }
+  }
+  btn.addEventListener('click',toggle);
+  btn.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+});if(!isOpen){item.classList.add('is-open');const ans=item.querySelector('.faq-answer');ans.style.height=ans.scrollHeight+'px';}});});
 const diagForm=document.getElementById('diagForm');const successMsg=document.getElementById('successMsg');
 if(diagForm){diagForm.addEventListener('submit',function(e){e.preventDefault();const fd=new FormData(diagForm);fetch('../',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(fd).toString()}).then(()=>{diagForm.style.display='none';successMsg.classList.add('show');}).catch(()=>{diagForm.style.display='none';successMsg.classList.add('show');});});}
 </script>
