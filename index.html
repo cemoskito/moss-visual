@@ -64,14 +64,15 @@
     .nav-hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);margin:5px 0;transition:all .3s}
 
     /* HERO */
-    #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(6rem,12vw,10rem) clamp(1rem,5vw,4rem) clamp(4rem,8vw,6rem);background:radial-gradient(ellipse 75% 60% at 65% 45%,rgba(217,78,15,.07) 0%,transparent 65%),var(--bg-primary);position:relative;overflow:hidden}
+    #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(6rem,12vw,10rem) clamp(1rem,5vw,4rem) clamp(4rem,8vw,6rem);background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(217,78,15,.12) 0%,transparent 65%),var(--bg-primary);position:relative;overflow:hidden}
     #hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f4f2ee' fill-opacity='0.018'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
-    .hero-content{position:relative;max-width:820px}
+    #hero::after{content:'25';position:absolute;right:clamp(-2rem,0vw,2rem);bottom:-0.12em;font-family:'JetBrains Mono',monospace;font-weight:900;font-size:clamp(16rem,28vw,30rem);line-height:1;color:var(--accent);opacity:.035;pointer-events:none;user-select:none;letter-spacing:-.06em;z-index:0}
+    .hero-content{position:relative;max-width:min(1000px,100%);z-index:1}
     .hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent-sub);border:1px solid rgba(217,78,15,.25);color:var(--accent);font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1rem;border-radius:100px;margin-bottom:1.75rem;width:fit-content}
     .hero-eyebrow::before{content:'●';font-size:7px}
-    .hero-headline{font-size:clamp(3rem,6vw,5.5rem);font-weight:900;line-height:.95;letter-spacing:-.04em;max-width:18ch;margin-bottom:1.5rem}
+    .hero-headline{font-size:clamp(2.5rem,7vw,8rem);font-weight:900;line-height:.93;letter-spacing:-.045em;max-width:16ch;margin-bottom:1.75rem}
     .hero-headline em{font-style:normal;color:var(--accent)}
-    .hero-sub{font-size:clamp(1rem,1.8vw,1.2rem);color:var(--text-sec);max-width:56ch;margin-bottom:2.5rem;line-height:1.75}
+    .hero-sub{font-size:clamp(1.05rem,1.9vw,1.3rem);color:var(--text-sec);max-width:52ch;margin-bottom:2.75rem;line-height:1.75}
     .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
 
     /* BUTTONS */
@@ -85,9 +86,9 @@
     /* STATS — FIX 2: 4+ provincias replaced */
     #stats{background:var(--bg-secondary);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
     .stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
-    .stat-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;text-align:center;border-right:1px solid var(--border)}
+    .stat-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(2rem,3.5vw,3rem) 1.5rem;text-align:center;border-right:1px solid var(--border)}
     .stat-item:last-child{border-right:none}
-    .stat-num{font-family:'JetBrains Mono',monospace;font-size:clamp(2rem,3.8vw,3.2rem);font-weight:900;color:var(--accent);line-height:1;letter-spacing:-.03em;margin-bottom:.4rem}
+    .stat-num{font-family:'JetBrains Mono',monospace;font-size:clamp(2.5rem,5.5vw,5.5rem);font-weight:900;color:var(--accent);line-height:1;letter-spacing:-.04em;margin-bottom:.5rem}
     .stat-suffix{font-family:'JetBrains Mono',monospace;font-size:.75em}
     .stat-label{font-size:.72rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;line-height:1.35}
 
@@ -96,18 +97,18 @@
     .section-alt{background:var(--bg-warm)}
     .section-dark{background:var(--bg-secondary)}
     .section-eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-    .section-title{font-size:clamp(2rem,3.5vw,3.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:1.25rem;max-width:700px}
+    .section-title{font-size:clamp(2rem,4vw,4.5rem);font-weight:800;letter-spacing:-.035em;line-height:1.02;margin-bottom:1.25rem;max-width:800px}
     .section-sub{font-size:1.05rem;color:var(--text-sec);max-width:60ch;line-height:1.8;margin-bottom:4rem}
     .section-divider{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--border-warm) 30%,var(--border-warm) 70%,transparent)}
 
-    /* PROBLEM CARDS — icon based */
-    .problems-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
-    .problem-card{background:var(--bg-secondary);border-radius:12px;padding:1.75rem;box-shadow:0 0 0 1px var(--ring);transition:all .3s}
-    .problem-card:hover{box-shadow:0 0 0 1px rgba(217,78,15,.2),0 20px 50px rgba(0,0,0,.5);transform:translateY(-3px)}
-    .problem-icon{width:50px;height:50px;border-radius:12px;background:var(--accent-sub);border:1px solid rgba(217,78,15,.18);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
-    .problem-icon svg{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .problem-card h3{font-size:1rem;font-weight:700;margin-bottom:.5rem}
-    .problem-card p{font-size:.875rem;color:var(--text-sec);line-height:1.65}
+    /* PROBLEM LIST — numbered, no cards */
+    .problems-list{border-top:1px solid var(--border);margin-top:0}
+    .problem-item{display:grid;grid-template-columns:clamp(3rem,6vw,5rem) 1fr;gap:clamp(1.5rem,3vw,3rem);padding:clamp(1.75rem,3vw,2.5rem) 0;border-bottom:1px solid var(--border);align-items:start;transition:border-color .2s}
+    .problem-item:hover{border-bottom-color:rgba(217,78,15,.25)}
+    .problem-num{font-family:'JetBrains Mono',monospace;font-size:clamp(1.5rem,3vw,2.5rem);font-weight:900;color:var(--accent);opacity:.5;line-height:1.1;letter-spacing:-.03em;padding-top:.1em}
+    .problem-item h3{font-size:clamp(1rem,1.6vw,1.2rem);font-weight:700;margin-bottom:.625rem;letter-spacing:-.02em;color:var(--text-primary)}
+    .problem-item p{font-size:.9rem;color:var(--text-sec);line-height:1.7;max-width:60ch}
+    @media(max-width:600px){.problem-item{grid-template-columns:2.5rem 1fr;gap:1rem}}
 
     /* SERVICE CARDS with images + gallery */
     .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
@@ -398,38 +399,34 @@
   <div class="section-eyebrow" data-animate>El problema</div>
   <h2 class="section-title" data-animate>Tu negocio pierde clientes antes de que entren por la puerta</h2>
   <p class="section-sub" data-animate>La identidad visual de un local comunica calidad, confianza y profesionalismo — antes de que abras la boca o muestres un precio.</p>
-  <div class="problems-grid cards-grid">
-    <div class="problem-card card">
-      <div class="problem-icon">
-        <!-- Icono: advertencia / deterioro -->
-        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  <div class="problems-list">
+    <div class="problem-item" data-animate>
+      <div class="problem-num">01</div>
+      <div>
+        <h3>Cartelería vieja, clientes que dudan</h3>
+        <p>Un frente deteriorado genera desconfianza inmediata. El 72% de los consumidores juzgan a un negocio por su imagen exterior antes de entrar.</p>
       </div>
-      <h3>Cartelería vieja = clientes que dudan</h3>
-      <p>Un frente deteriorado genera desconfianza inmediata. El 72% de los consumidores juzgan a un negocio por su imagen exterior antes de entrar.</p>
     </div>
-    <div class="problem-card card">
-      <div class="problem-icon">
-        <!-- Icono: invisibilidad / ojo tachado -->
-        <svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+    <div class="problem-item" data-animate data-delay="0.07">
+      <div class="problem-num">02</div>
+      <div>
+        <h3>Invisible entre la competencia</h3>
+        <p>Si tu cartelería no comunica claramente qué hacés y por qué sos la mejor opción, simplemente no existís para el cliente que pasa por tu puerta.</p>
       </div>
-      <h3>Invisible entre la competencia</h3>
-      <p>Si tu cartelería no comunica claramente qué hacés y por qué sos la mejor opción, simplemente no existís para el cliente que pasa por tu puerta.</p>
     </div>
-    <div class="problem-card card">
-      <div class="problem-icon">
-        <!-- Icono: crecimiento vs imagen estancada -->
-        <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+    <div class="problem-item" data-animate data-delay="0.14">
+      <div class="problem-num">03</div>
+      <div>
+        <h3>Tu negocio creció. Tu imagen, no.</h3>
+        <p>A medida que una empresa se expande, la identidad visual suele quedar atrás. Carteles viejos y fachadas desactualizadas dañan la percepción de marca.</p>
       </div>
-      <h3>Tu negocio creció, tu imagen no</h3>
-      <p>A medida que una empresa se expande, la identidad visual suele quedar atrás. Carteles viejos y fachadas desactualizadas dañan la percepción de marca.</p>
     </div>
-    <div class="problem-card card">
-      <div class="problem-icon">
-        <!-- Icono: costo / dinero -->
-        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+    <div class="problem-item" data-animate data-delay="0.21">
+      <div class="problem-num">04</div>
+      <div>
+        <h3>Mantenimiento cero = costos altos</h3>
+        <p>Esperar a que algo se rompa siempre cuesta más. La cartelería sin mantenimiento preventivo deteriora la imagen de tu marca todos los días.</p>
       </div>
-      <h3>Mantenimiento cero = costos altos</h3>
-      <p>Esperar a que algo se rompa siempre cuesta más. La cartelería sin mantenimiento preventivo deteriora la imagen de tu marca todos los días.</p>
     </div>
   </div>
 </section>
