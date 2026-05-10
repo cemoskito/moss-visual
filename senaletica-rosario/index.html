@@ -373,7 +373,7 @@ document.querySelectorAll('.faq-question').forEach(btn=>{
   }
   btn.addEventListener('click',toggle);
   btn.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
-});if(!isOpen){item.classList.add('is-open');const ans=item.querySelector('.faq-answer');ans.style.height=ans.scrollHeight+'px';}});});
+});
 const diagForm=document.getElementById('diagForm');const successMsg=document.getElementById('successMsg');
 if(diagForm){diagForm.addEventListener('submit',function(e){e.preventDefault();const fd=new FormData(diagForm);fetch('../',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(fd).toString()}).then(()=>{diagForm.style.display='none';successMsg.classList.add('show');}).catch(()=>{diagForm.style.display='none';successMsg.classList.add('show');});});}
 </script>
