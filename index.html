@@ -120,6 +120,7 @@
     .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
     .card{background:var(--bg-secondary);border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px var(--ring);transition:box-shadow .3s,transform .3s;cursor:default;display:flex;flex-direction:column}
     .card:hover{transform:translateY(-3px);box-shadow:0 0 0 1px rgba(217,78,15,.2),0 20px 50px rgba(0,0,0,.5)}
+    a.card{cursor:pointer;text-decoration:none;color:inherit}
     .card-img{width:100%;height:160px;object-fit:cover;display:block;filter:brightness(.7) saturate(.75);transition:filter .4s}
     .card:hover .card-img{filter:brightness(.88) saturate(1)}
     .card-body{padding:1.5rem;flex:1}
@@ -128,38 +129,6 @@
     .card p{font-size:.875rem;color:var(--text-sec);line-height:1.65}
     .card-link{display:inline-flex;align-items:center;gap:.35rem;margin-top:.75rem;font-size:.8rem;font-weight:600;color:var(--accent);text-decoration:none;letter-spacing:.02em;transition:gap .2s,opacity .2s}
     .card-link:hover{gap:.55rem;opacity:.85}
-    /* GALLERY TOGGLE */
-    .gallery-toggle{display:flex;align-items:center;justify-content:space-between;gap:.5rem;background:none;border:none;border-top:1px solid var(--border);color:var(--text-muted);font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;padding:.875rem 1.5rem;width:100%;letter-spacing:.05em;text-transform:uppercase;transition:background .2s,color .2s}
-    .gallery-toggle:hover{background:var(--accent-sub);color:var(--accent)}
-    .gallery-toggle.open{color:var(--accent);background:var(--accent-sub)}
-    .gallery-toggle svg{width:13px;height:13px;stroke:currentColor;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s;flex-shrink:0}
-    .gallery-toggle.open svg{transform:rotate(180deg)}
-    /* CARD GALLERY */
-    .card-gallery{max-height:0;overflow:hidden;transition:max-height .42s ease}
-    .card-gallery.open{max-height:600px}
-    .gallery-inner{padding:1.25rem 1.5rem 1.5rem;background:var(--bg-tertiary)}
-    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
-    .gallery-thumb{border-radius:5px;overflow:hidden;cursor:zoom-in;aspect-ratio:4/3;display:block}
-    .gallery-thumb img{width:100%;height:100%;object-fit:cover;filter:brightness(.82);transition:filter .3s,transform .35s;display:block}
-    .gallery-thumb:hover img{filter:brightness(1);transform:scale(1.05)}
-    .gallery-note{font-size:.73rem;color:var(--text-muted);margin-top:.875rem;text-align:center;font-style:italic;line-height:1.5}
-    .card-gallery.open{max-height:1200px}
-    /* LIGHTBOX */
-    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:1000;align-items:center;justify-content:center;padding:1.5rem}
-    .lightbox.show{display:flex}
-    .lightbox-inner{position:relative;max-width:min(80vw,900px)}
-    .lightbox-img{max-width:min(80vw,900px);max-height:80vh;border-radius:6px;object-fit:contain;display:block;box-shadow:0 0 0 1px rgba(244,242,238,.08)}
-    .lightbox-close{position:absolute;top:-2.75rem;right:0;background:none;border:none;color:var(--text-sec);font-size:1.8rem;cursor:pointer;line-height:1;transition:color .2s;padding:.25rem;font-weight:300}
-    .lightbox-close:hover{color:var(--text-primary)}
-    .lightbox-caption{margin-top:.875rem;text-align:center;font-size:.78rem;color:var(--text-muted)}
-    /* Navegación lightbox ← → */
-    .lb-nav{position:fixed;top:50%;transform:translateY(-50%);background:rgba(244,242,238,.08);border:1px solid rgba(244,242,238,.14);border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;color:var(--text-primary);cursor:pointer;transition:background .2s,opacity .2s;z-index:1001;flex-shrink:0}
-    .lb-nav:hover{background:rgba(217,78,15,.18);border-color:var(--accent-ring)}
-    .lb-nav svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-    .lb-prev{left:clamp(.75rem,3vw,2.5rem)}
-    .lb-next{right:clamp(.75rem,3vw,2.5rem)}
-    .lb-nav.lb-hidden{opacity:0;pointer-events:none}
-
     /* DIFERENCIAL — FIX 5 */
     .diferencial-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,5vw,5rem);align-items:center}
     .diferencial-text h2{font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:1.5rem}
@@ -377,202 +346,75 @@
     <p class="section-sub" data-animate>De la idea a la instalación. Fabricación propia, sin intermediarios.</p>
     <div class="services-grid cards-grid">
 
-      <div class="card">
+      <a class="card" href="/carteleria-luminosa-rosario/">
         <img src="img/servicios/portada-luminosa.jpg" alt="Cartelería Luminosa MOSS Visual Rosario" class="card-img" loading="lazy">
         <div class="card-body">
           <div class="card-badge">Luminosa</div>
           <h3>Cartelería Luminosa</h3>
           <p>LED, cajas de luz y letras iluminadas. Visibilidad 24/7 con materiales de primera calidad.</p>
-          <a href="/carteleria-luminosa-rosario/" class="card-link">Ver servicio completo →</a>
+          <span class="card-link" aria-hidden="true">Ver servicio completo →</span>
         </div>
-        <button class="gallery-toggle" aria-expanded="false">
-          <span>Ver trabajos</span>
-          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="card-gallery">
-          <div class="gallery-inner">
-            <div class="gallery-grid">
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-01.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-02.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-03.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-04.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-05.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-06.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-07.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-08.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-09.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-10.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-11.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-12.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-13.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-14.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-15.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/luminosa-16.jpg" alt="Cartelería Luminosa LED en caja de luz — local comercial Rosario — MOSS Visual" data-caption="Cartelería Luminosa" loading="lazy"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </a>
 
-      <div class="card">
+      <a class="card" href="/letras-corporeas-rosario/">
         <img src="img/servicios/portada-corporeos.jpg" alt="Letras Corpóreas MOSS Visual Rosario" class="card-img" loading="lazy">
         <div class="card-body">
           <div class="card-badge">Corpóreos</div>
           <h3>Letras Corpóreas</h3>
           <p>Letras y logos en relieve para fachadas, recepciones y locales. Alto impacto visual, acabado premium.</p>
-          <a href="/letras-corporeas-rosario/" class="card-link">Ver servicio completo →</a>
+          <span class="card-link" aria-hidden="true">Ver servicio completo →</span>
         </div>
-        <button class="gallery-toggle" aria-expanded="false">
-          <span>Ver trabajos</span>
-          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="card-gallery">
-          <div class="gallery-inner">
-            <div class="gallery-grid">
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-01.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-02.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-03.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-04.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-05.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-06.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-07.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-08.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-09.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-10.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-11.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-12.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-13.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/corporeos-14.jpg" alt="Letras corpóreas en aluminio retroiluminadas — fachada empresa Rosario — MOSS Visual" data-caption="Letras Corpóreas" loading="lazy"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </a>
 
-      <div class="card">
+      <a class="card" href="/senaletica-rosario/">
         <img src="img/servicios/portada-senaletica.jpg" alt="Señalética MOSS Visual Rosario" class="card-img" loading="lazy">
         <div class="card-body">
           <div class="card-badge">Señalética</div>
           <h3>Señalética</h3>
           <p>Sistemas de señalización para edificios, oficinas, consorcios y espacios comerciales.</p>
-          <a href="/senaletica-rosario/" class="card-link">Ver servicio completo →</a>
+          <span class="card-link" aria-hidden="true">Ver servicio completo →</span>
         </div>
-        <button class="gallery-toggle" aria-expanded="false">
-          <span>Ver trabajos</span>
-          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="card-gallery">
-          <div class="gallery-inner">
-            <div class="gallery-grid">
-              <div class="gallery-thumb"><img src="img/servicios/senaletica-01.jpg" alt="Señalética corporativa en vinilo — oficinas Rosario — MOSS Visual" data-caption="Señalética" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/senaletica-02.jpg" alt="Señalética corporativa en vinilo — oficinas Rosario — MOSS Visual" data-caption="Señalética" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/senaletica-03.jpg" alt="Señalética corporativa en vinilo — oficinas Rosario — MOSS Visual" data-caption="Señalética" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/senaletica-04.jpg" alt="Señalética corporativa en vinilo — oficinas Rosario — MOSS Visual" data-caption="Señalética" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/senaletica-05.jpg" alt="Señalética corporativa en vinilo — oficinas Rosario — MOSS Visual" data-caption="Señalética" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/senaletica-06.jpg" alt="Señalética corporativa en vinilo — oficinas Rosario — MOSS Visual" data-caption="Señalética" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/senaletica-07.jpg" alt="Señalética corporativa en vinilo — oficinas Rosario — MOSS Visual" data-caption="Señalética" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/senaletica-08.jpg" alt="Señalética corporativa en vinilo — oficinas Rosario — MOSS Visual" data-caption="Señalética" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/senaletica-09.jpg" alt="Señalética corporativa en vinilo — oficinas Rosario — MOSS Visual" data-caption="Señalética" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/senaletica-10.jpg" alt="Señalética corporativa en vinilo — oficinas Rosario — MOSS Visual" data-caption="Señalética" loading="lazy"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </a>
 
-      <div class="card">
+      <a class="card" href="/ploteo-vehicular-rosario/">
         <img src="img/servicios/portada-ploteo.jpg" alt="Ploteo Vehicular MOSS Visual Rosario" class="card-img" loading="lazy">
         <div class="card-body">
           <div class="card-badge">Vehicular</div>
           <h3>Ploteo Vehicular</h3>
           <p>Tu marca en movimiento. Diseño, ploteo e instalación en cualquier vehículo o flota.</p>
-          <a href="/ploteo-vehicular-rosario/" class="card-link">Ver servicio completo →</a>
+          <span class="card-link" aria-hidden="true">Ver servicio completo →</span>
         </div>
-        <button class="gallery-toggle" aria-expanded="false">
-          <span>Ver trabajos</span>
-          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="card-gallery">
-          <div class="gallery-inner">
-            <div class="gallery-grid">
-              <div class="gallery-thumb"><img src="img/servicios/portada-ploteo.jpg" alt="Ploteo Vehicular" data-caption="Ploteo Vehicular"></div>
-            </div>
-            <p class="gallery-note">Portfolio de proyectos en actualización · Consultá por trabajos realizados</p>
-          </div>
-        </div>
-      </div>
+      </a>
 
-      <div class="card">
+      <a class="card" href="/cercos-obra-lonas-rosario/">
         <img src="img/servicios/portada-cercos.jpg" alt="Cercos de Obra, Ploteos y Lonas MOSS Visual Rosario" class="card-img" loading="lazy">
         <div class="card-body">
           <div class="card-badge">Cercos · Lonas</div>
           <h3>Cercos de Obra, Ploteos y Lonas</h3>
           <p>Gran formato para obra, eventos y vía pública. Cercos decorativos, lonas microperforadas y ploteos en gran escala.</p>
-          <a href="/cercos-obra-lonas-rosario/" class="card-link">Ver servicio completo →</a>
+          <span class="card-link" aria-hidden="true">Ver servicio completo →</span>
         </div>
-        <button class="gallery-toggle" aria-expanded="false">
-          <span>Ver trabajos</span>
-          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="card-gallery">
-          <div class="gallery-inner">
-            <div class="gallery-grid">
-              <div class="gallery-thumb"><img src="img/servicios/cercos-01.jpg" alt="Lona microperforada para cerco de obra — Rosario — MOSS Visual" data-caption="Cercos de Obra y Lonas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/cercos-02.jpg" alt="Lona microperforada para cerco de obra — Rosario — MOSS Visual" data-caption="Cercos de Obra y Lonas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/cercos-03.jpg" alt="Lona microperforada para cerco de obra — Rosario — MOSS Visual" data-caption="Cercos de Obra y Lonas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/cercos-04.jpg" alt="Lona microperforada para cerco de obra — Rosario — MOSS Visual" data-caption="Cercos de Obra y Lonas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/cercos-05.jpg" alt="Lona microperforada para cerco de obra — Rosario — MOSS Visual" data-caption="Cercos de Obra y Lonas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/cercos-06.jpg" alt="Lona microperforada para cerco de obra — Rosario — MOSS Visual" data-caption="Cercos de Obra y Lonas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/cercos-07.jpg" alt="Lona microperforada para cerco de obra — Rosario — MOSS Visual" data-caption="Cercos de Obra y Lonas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/cercos-08.jpg" alt="Lona microperforada para cerco de obra — Rosario — MOSS Visual" data-caption="Cercos de Obra y Lonas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/cercos-09.jpg" alt="Lona microperforada para cerco de obra — Rosario — MOSS Visual" data-caption="Cercos de Obra y Lonas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/cercos-10.jpg" alt="Lona microperforada para cerco de obra — Rosario — MOSS Visual" data-caption="Cercos de Obra y Lonas" loading="lazy"></div>
-              <div class="gallery-thumb"><img src="img/servicios/cercos-11.jpg" alt="Lona microperforada para cerco de obra — Rosario — MOSS Visual" data-caption="Cercos de Obra y Lonas" loading="lazy"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </a>
 
-      <div class="card">
+      <a class="card" href="/fachadas-comerciales-rosario/">
         <img src="img/servicios/portada-fachadas.jpg" alt="Fachadas Comerciales MOSS Visual Rosario" class="card-img" loading="lazy">
         <div class="card-body">
           <div class="card-badge">Fachadas</div>
           <h3>Fachadas Comerciales</h3>
           <p>Transformación integral del frente de tu local, de proyecto a entrega llave en mano.</p>
-          <a href="/fachadas-comerciales-rosario/" class="card-link">Ver servicio completo →</a>
+          <span class="card-link" aria-hidden="true">Ver servicio completo →</span>
         </div>
-        <button class="gallery-toggle" aria-expanded="false">
-          <span>Ver trabajos</span>
-          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="card-gallery">
-          <div class="gallery-inner">
-            <div class="gallery-grid">
-              <div class="gallery-thumb"><img src="img/servicios/portada-fachadas.jpg" alt="Fachadas Comerciales" data-caption="Fachadas Comerciales"></div>
-            </div>
-            <p class="gallery-note">Portfolio de proyectos en actualización · Consultá por trabajos realizados</p>
-          </div>
-        </div>
-      </div>
+      </a>
 
-      <div class="card">
+      <a class="card" href="/arquitectura-comercial-rosario/">
         <img src="img/servicios/portada-arquitectura.jpg" alt="Arquitectura Comercial MOSS Visual Rosario" class="card-img" loading="lazy">
         <div class="card-body">
           <div class="card-badge">Arquitectura</div>
           <h3>Arquitectura Comercial</h3>
           <p>Intervención integral del espacio comercial: diseño, materialidad e identidad visual unificados.</p>
-          <a href="/arquitectura-comercial-rosario/" class="card-link">Ver servicio completo →</a>
+          <span class="card-link" aria-hidden="true">Ver servicio completo →</span>
         </div>
-        <button class="gallery-toggle" aria-expanded="false">
-          <span>Ver trabajos</span>
-          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="card-gallery">
-          <div class="gallery-inner">
-            <div class="gallery-grid">
-              <div class="gallery-thumb"><img src="img/servicios/portada-arquitectura.jpg" alt="Arquitectura Comercial" data-caption="Arquitectura Comercial"></div>
-            </div>
-            <p class="gallery-note">Portfolio de proyectos en actualización · Consultá por trabajos realizados</p>
-          </div>
-        </div>
-      </div>
+      </a>
 
     </div>
   </div>
@@ -867,21 +709,6 @@
   </div>
 </footer>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
-  <button class="lb-nav lb-prev lb-hidden" id="lbPrev" aria-label="Imagen anterior">
-    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-  </button>
-  <div class="lightbox-inner">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">×</button>
-    <img class="lightbox-img" id="lightboxImg" src="" alt="">
-    <p class="lightbox-caption" id="lightboxCaption"></p>
-  </div>
-  <button class="lb-nav lb-next lb-hidden" id="lbNext" aria-label="Imagen siguiente">
-    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-  </button>
-</div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
@@ -918,66 +745,6 @@
   });
 
   // Logos: marquee es CSS puro, no requiere GSAP
-
-  // GALLERY TOGGLE
-  document.querySelectorAll('.gallery-toggle').forEach(btn=>{
-    btn.addEventListener('click',function(){
-      const gallery=this.nextElementSibling;
-      const isOpen=gallery.classList.toggle('open');
-      this.classList.toggle('open',isOpen);
-      this.setAttribute('aria-expanded',isOpen);
-      this.querySelector('span').textContent=isOpen?'Ocultar trabajos':'Ver trabajos';
-    });
-  });
-
-  // LIGHTBOX con navegación ← →
-  const lb=document.getElementById('lightbox');
-  const lbImg=document.getElementById('lightboxImg');
-  const lbCaption=document.getElementById('lightboxCaption');
-  const lbPrev=document.getElementById('lbPrev');
-  const lbNext=document.getElementById('lbNext');
-  let lbImages=[],lbIndex=0;
-
-  function showLBImage(idx){
-    const img=lbImages[idx];
-    lbImg.src=img.src;
-    lbImg.alt=img.alt;
-    lbCaption.textContent=img.dataset.caption||'';
-    const multi=lbImages.length>1;
-    lbPrev.classList.toggle('lb-hidden',!multi);
-    lbNext.classList.toggle('lb-hidden',!multi);
-  }
-
-  document.querySelectorAll('.gallery-thumb img').forEach(img=>{
-    img.addEventListener('click',function(){
-      const gallery=this.closest('.card-gallery');
-      lbImages=Array.from(gallery.querySelectorAll('.gallery-thumb img'));
-      lbIndex=lbImages.indexOf(this);
-      showLBImage(lbIndex);
-      lb.classList.add('show');
-      document.body.style.overflow='hidden';
-    });
-  });
-
-  lbPrev.addEventListener('click',function(e){
-    e.stopPropagation();
-    lbIndex=(lbIndex-1+lbImages.length)%lbImages.length;
-    showLBImage(lbIndex);
-  });
-  lbNext.addEventListener('click',function(e){
-    e.stopPropagation();
-    lbIndex=(lbIndex+1)%lbImages.length;
-    showLBImage(lbIndex);
-  });
-  document.getElementById('lightboxClose').addEventListener('click',closeLB);
-  lb.addEventListener('click',function(e){if(e.target===lb)closeLB();});
-  document.addEventListener('keydown',function(e){
-    if(!lb.classList.contains('show'))return;
-    if(e.key==='Escape')closeLB();
-    if(e.key==='ArrowLeft'){lbIndex=(lbIndex-1+lbImages.length)%lbImages.length;showLBImage(lbIndex);}
-    if(e.key==='ArrowRight'){lbIndex=(lbIndex+1)%lbImages.length;showLBImage(lbIndex);}
-  });
-  function closeLB(){lb.classList.remove('show');document.body.style.overflow='';}
 
   gsap.utils.toArray('[data-counter]').forEach(el=>{
     const target=parseInt(el.dataset.counter);
