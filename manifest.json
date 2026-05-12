@@ -1,0 +1,23 @@
+{
+  "name": "MOSS Visual",
+  "short_name": "MOSS Visual",
+  "description": "Cartelería, señalética y arquitectura comercial en Rosario",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#363333",
+  "theme_color": "#363333",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
