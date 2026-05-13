@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -47,7 +47,7 @@
     });
   </script>
   <style>
-    :root{--bg-primary:#090908;--bg-secondary:#0f0e0d;--bg-tertiary:#161412;--bg-elevated:#1e1b18;--bg-warm:#120f0d;--accent:#D94E0F;--accent-hover:#b83d0a;--accent-glow:rgba(217,78,15,.20);--accent-sub:rgba(217,78,15,.08);--accent-ring:rgba(217,78,15,.25);--text-primary:#f4f2ee;--text-sec:#a89f94;--text-muted:#5c554d;--border:rgba(244,242,238,.08);--border-warm:rgba(244,242,238,.14);--ring:rgba(244,242,238,.06)}
+    :root{--bg-primary:#090908;--bg-secondary:#0f0e0d;--bg-tertiary:#161412;--bg-elevated:#1e1b18;--bg-warm:#120f0d;--accent:#D94E0F;--accent-hover:#b83d0a;--accent-glow:rgba(217,78,15,.20);--accent-sub:rgba(217,78,15,.08);--accent-ring:rgba(217,78,15,.25);--text-primary:#f4f2ee;--text-sec:#a89f94;--text-muted:#7d7368;--border:rgba(244,242,238,.08);--border-warm:rgba(244,242,238,.14);--ring:rgba(244,242,238,.06)}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     @media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
     body{background:var(--bg-primary);color:var(--text-primary);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
@@ -72,7 +72,7 @@
     #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(6rem,12vw,10rem) clamp(1rem,5vw,4rem) clamp(4rem,8vw,6rem);background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(217,78,15,.12) 0%,transparent 65%),var(--bg-primary);position:relative;overflow:hidden}
     #hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f4f2ee' fill-opacity='0.018'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
     #hero::after{content:'25';position:absolute;right:clamp(-2rem,0vw,2rem);bottom:-0.12em;font-family:'JetBrains Mono',monospace;font-weight:900;font-size:clamp(16rem,28vw,30rem);line-height:1;color:var(--accent);opacity:.035;pointer-events:none;user-select:none;letter-spacing:-.06em;z-index:0}
-    .hero-content{position:relative;max-width:min(1000px,100%);z-index:1}
+    .hero-content{position:relative;max-width:min(1000px,100%);z-index:1;animation:heroReveal .65s cubic-bezier(0,0,.2,1) both}@keyframes heroReveal{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
     .hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent-sub);border:1px solid rgba(217,78,15,.25);color:var(--accent);font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1rem;border-radius:100px;margin-bottom:1.75rem;width:fit-content}
     .hero-eyebrow::before{content:'●';font-size:7px}
     .hero-headline{font-size:clamp(2.5rem,7vw,8rem);font-weight:900;line-height:.93;letter-spacing:-.045em;max-width:16ch;margin-bottom:1.75rem}
@@ -204,7 +204,7 @@
     .field{width:100%;padding:.875rem 1.125rem;background:var(--bg-tertiary);border:1px solid var(--border-warm);border-radius:8px;color:var(--text-primary);font-size:.95rem;font-family:'Inter',sans-serif;transition:border-color .2s,box-shadow .2s;outline:none;-webkit-appearance:none;appearance:none}
     .field:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(217,78,15,.1)}
     .field::placeholder{color:var(--text-muted)}
-    select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235c554d' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1.125rem center;padding-right:2.5rem;color:var(--text-muted)}
+    select.field{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237d7368' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1.125rem center;padding-right:2.5rem;color:var(--text-muted)}
     select.field.has-value{color:var(--text-primary)}
     select.field option{background:#161412;color:var(--text-primary)}
     .form-submit{width:100%;padding:1.125rem;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;letter-spacing:.02em;cursor:pointer;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:background .2s,transform .2s,box-shadow .2s}
@@ -246,7 +246,7 @@
   ═══════════════════════════════════════════ */
 
   /* Scroll progress bar */
-  #scroll-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:var(--accent);z-index:200;pointer-events:none;box-shadow:0 0 10px rgba(217,78,15,.55),0 0 4px rgba(217,78,15,.3);transition:width .08s linear}
+  #scroll-progress{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--accent);z-index:200;pointer-events:none;transform-origin:left;transform:scaleX(0);box-shadow:0 0 10px rgba(217,78,15,.55),0 0 4px rgba(217,78,15,.3);transition:width .08s linear}
 
   /* Hero orbs */
   .hero-orb{position:absolute;border-radius:50%;pointer-events:none;will-change:transform}
@@ -302,6 +302,12 @@
   @media(max-width:768px){.nav-links.open a:not(.nav-cta){padding:.75rem 0;display:block}.nav-links.open .nav-cta{padding:.875rem 1.4rem;display:block;text-align:center}}
     @media(max-width:768px){.field{font-size:1rem}}
     .btn-primary:focus-visible,.btn-ghost:focus-visible,.form-submit:focus-visible,.nav-links a:focus-visible,.nav-cta:focus-visible,.nav-hamburger:focus-visible,.faq-question:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+    .field.error{border-color:rgba(217,78,15,.65)!important;box-shadow:0 0 0 2px rgba(217,78,15,.12)!important}
+    .field-error-msg{display:block;color:#c9503a;font-size:.78rem;margin-top:.38rem;font-weight:500;line-height:1.4}
+    #backToTop{position:fixed;bottom:2rem;right:2rem;z-index:150;width:44px;height:44px;border-radius:50%;background:var(--bg-elevated);border:1px solid var(--border-warm);color:var(--text-sec);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s,background .2s,color .2s;pointer-events:none}
+    #backToTop.visible{opacity:1;transform:none;pointer-events:auto}
+    #backToTop:hover{background:var(--accent);color:#fff;border-color:transparent}
+    .section-sub{max-width:68ch}.service-desc p,.diferencial-text p{max-width:66ch}
     </style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://mossvisual.com/"}]}
@@ -344,27 +350,6 @@
   </div>
 </section>
 
-<!-- STATS — FIX 2: 100% fab. propia reemplaza 4+ provincias -->
-<section id="stats">
-  <div class="stats-grid">
-    <div class="stat-item" data-animate>
-      <div class="stat-num"><span data-counter="25">25</span></div>
-      <div class="stat-label">años perfeccionando<br>cada proyecto</div>
-    </div>
-    <div class="stat-item" data-animate data-delay="0.08">
-      <div class="stat-num"><span data-counter="500">500</span><span class="stat-suffix">+</span></div>
-      <div class="stat-label">negocios<br>transformados</div>
-    </div>
-    <div class="stat-item" data-animate data-delay="0.16">
-      <div class="stat-num"><span data-counter="100">100</span><span class="stat-suffix">%</span></div>
-      <div class="stat-label">fabricación<br>propia</div>
-    </div>
-    <div class="stat-item" data-animate data-delay="0.24">
-      <div class="stat-num"><span data-counter="24">24</span><span class="stat-suffix">hs</span></div>
-      <div class="stat-label">para tu<br>presupuesto</div>
-    </div>
-  </div>
-</section>
 
 <hr class="section-divider">
 
@@ -659,7 +644,7 @@
     <p>Solicitá tu diagnóstico gratuito ahora y descubrí exactamente qué está limitando el potencial visual de tu negocio.</p>
     <div class="cta-mid-actions">
       <a href="#diagnostico" class="btn-primary">
-        Quiero mi diagnóstico gratuito →
+        Pedir mi diagnóstico gratuito →
       </a>
       <a href="https://wa.me/5493412578950?text=Hola%2C%20quiero%20consultar%20sobre%20un%20diagn%C3%B3stico%20gratuito%20para%20mi%20negocio." target="_blank" class="btn-ghost">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -846,6 +831,7 @@
       <a href="#servicios">Servicios</a>
       <a href="#diferencial">Nosotros</a>
       <a href="#diagnostico">Diagnóstico gratuito</a>
+      <a href="https://www.instagram.com/mossvisual/" target="_blank" rel="noopener">Instagram</a>
     </div>
     <div class="footer-copy">
       Rosario, Argentina<br>
@@ -918,7 +904,19 @@
   if(diagForm){
     diagForm.addEventListener('submit',function(e){
       e.preventDefault();
-      // GA4 Event Tracking — BLOQUE 1 FASE 2
+      /* -- Validacion -- */
+      var _reqs=['nombre','telefono','ubicacion'];var _hasErr=false;
+      _reqs.forEach(function(id){
+        var inp=document.getElementById(id);
+        var grp=inp.closest('.form-group');
+        var err=grp.querySelector('.field-error-msg');
+        var empty=!inp.value.trim();
+        if(empty){inp.classList.add('error');if(!err){err=document.createElement('span');err.className='field-error-msg';grp.appendChild(err);}err.textContent='Completa este campo.';_hasErr=true;}
+        else{inp.classList.remove('error');if(err)err.remove();}
+      });
+      if(_hasErr){var firstErr=document.querySelector('.field.error');if(firstErr)firstErr.scrollIntoView({behavior:'smooth',block:'center'});return;}
+      /* -- Fin validacion -- */
+            // GA4 Event Tracking — BLOQUE 1 FASE 2
       gtag('event', 'form_submit', {
         'form_name': 'diagnostico_gratuito',
         'form_location': 'mid_page_form',
@@ -942,6 +940,20 @@
       });
     });
   }
+  /* -- Blur validation -- */
+  ['nombre','telefono','ubicacion'].forEach(function(id){
+    var inp=document.getElementById(id);
+    if(!inp)return;
+    inp.addEventListener('blur',function(){
+      var grp=inp.closest('.form-group');
+      var err=grp.querySelector('.field-error-msg');
+      if(inp.required&&!inp.value.trim()){inp.classList.add('error');if(!err){err=document.createElement('span');err.className='field-error-msg';grp.appendChild(err);}err.textContent='Completa este campo.';}
+      else{inp.classList.remove('error');if(err)err.remove();}
+    });
+    inp.addEventListener('input',function(){
+      if(inp.classList.contains('error')&&inp.value.trim()){inp.classList.remove('error');var e2=inp.closest('.form-group').querySelector('.field-error-msg');if(e2)e2.remove();}
+    });
+  });
   function showSuccess(){
     diagForm.style.display='none';
     successMsg.classList.add('show');
@@ -990,7 +1002,7 @@
   const progressBar=document.getElementById('scroll-progress');
   window.addEventListener('scroll',()=>{
     const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
-    progressBar.style.width=Math.min(pct,100)+'%';
+    progressBar.style.transform='scaleX('+Math.min(pct/100,1)+')';
   },{passive:true});
 
   /* ── CUSTOM CURSOR ── cursor SVG naranja vía CSS, sin overlay JS ── */
@@ -1141,6 +1153,14 @@
     obs.observe(diagSection);
   }
 })();
+
+  /* -- BACK TO TOP -- */
+  var bttBtn=document.getElementById('backToTop');
+  window.addEventListener('scroll',function(){bttBtn.classList.toggle('visible',window.scrollY>600);},{passive:true});
+  bttBtn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
 </script>
+<button id="backToTop" aria-label="Volver arriba" title="Volver arriba"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 </body>
 </html>
+
+
