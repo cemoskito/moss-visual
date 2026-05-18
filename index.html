@@ -47,21 +47,22 @@
     });
   </script>
   <style>
-    :root{--bg-primary:#090908;--bg-secondary:#0f0e0d;--bg-tertiary:#161412;--bg-elevated:#1e1b18;--bg-warm:#120f0d;--accent:#D94E0F;--accent-hover:#b83d0a;--accent-glow:rgba(217,78,15,.20);--accent-sub:rgba(217,78,15,.08);--accent-ring:rgba(217,78,15,.25);--text-primary:#f4f2ee;--text-sec:#a89f94;--text-muted:#7d7368;--border:rgba(244,242,238,.08);--border-warm:rgba(244,242,238,.14);--ring:rgba(244,242,238,.06)}
+    :root{--bg-primary:#090908;--bg-secondary:#0f0e0d;--bg-tertiary:#161412;--bg-elevated:#1e1b18;--bg-warm:#120f0d;--accent:#D94E0F;--accent-hover:#b83d0a;--accent-glow:rgba(217,78,15,.20);--accent-sub:rgba(217,78,15,.08);--accent-ring:rgba(217,78,15,.25);--text-primary:#f4f2ee;--text-sec:#a89f94;--text-muted:#7d7368;--border:rgba(244,242,238,.08);--border-warm:rgba(244,242,238,.14);--ring:rgba(244,242,238,.06);--bg-nav:rgba(9,9,8,.88);--bg-nav-solid:rgba(9,9,8,.97);--accent-btn-glow:rgba(217,78,15,.40)}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     @media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
     body{background:var(--bg-primary);color:var(--text-primary);font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
     [data-animate]{opacity:0}
     @media(prefers-reduced-motion:reduce){[data-animate]{opacity:1!important;transform:none!important}}
+    .skip-link{position:absolute;top:-100%;left:1rem;z-index:999;background:var(--accent);color:#fff;padding:.5rem 1rem;border-radius:0 0 6px 6px;font-size:.875rem;font-weight:700;text-decoration:none;transition:top .2s}.skip-link:focus{top:0}
     .container{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,5vw,4rem)}
 
     /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1rem,5vw,4rem);background:rgba(9,9,8,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:background .3s}
-    nav.scrolled{background:rgba(9,9,8,.97)}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1rem,5vw,4rem);background:var(--bg-nav);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:background .3s}
+    nav.scrolled{background:var(--bg-nav-solid)}
     .nav-logo{font-size:1.35rem;font-weight:900;letter-spacing:-.03em;text-decoration:none;color:var(--text-primary)}
     .nav-logo span{color:var(--accent)}
     .nav-links{display:flex;align-items:center;gap:2rem}
-    .nav-links a{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-sec);text-decoration:none;transition:color .2s}
+    .nav-links a{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-sec);text-decoration:none;transition:color .2s;padding:.75rem 0;display:inline-flex;align-items:center}
     .nav-links a:hover{color:var(--text-primary)}
     .nav-links a.nav-cta,.nav-cta{background:var(--accent);color:#fff!important;font-size:.85rem;font-weight:700;letter-spacing:.02em;padding:.65rem 1.4rem;border-radius:6px;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;text-transform:none}
     .nav-links a.nav-cta:hover,.nav-cta:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 6px 20px var(--accent-glow);color:#fff!important}
@@ -74,7 +75,7 @@
     #hero::after{content:'25';position:absolute;right:clamp(-2rem,0vw,2rem);bottom:-0.12em;font-family:'JetBrains Mono',monospace;font-weight:900;font-size:clamp(16rem,28vw,30rem);line-height:1;color:var(--accent);opacity:.035;pointer-events:none;user-select:none;letter-spacing:-.06em;z-index:0}
     .hero-content{position:relative;max-width:min(1000px,100%);z-index:1;animation:heroReveal .65s cubic-bezier(0,0,.2,1) both}@keyframes heroReveal{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
     .hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent-sub);border:1px solid rgba(217,78,15,.25);color:var(--accent);font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1rem;border-radius:100px;margin-bottom:1.75rem;width:fit-content}
-    .hero-eyebrow::before{content:'●';font-size:7px}
+    .hero-eyebrow::before{content:'';display:inline-block;width:7px;height:7px;background:currentColor;border-radius:50%;flex-shrink:0}
     .hero-headline{font-size:clamp(2.25rem,6.5vw,7.5rem);font-weight:800;line-height:.92;letter-spacing:-.04em;max-width:20ch;margin-bottom:1.5rem;font-family:'Syne',system-ui,sans-serif}
     .hero-headline em{font-style:normal;color:var(--accent)}
     .hero-sub{font-size:clamp(1.05rem,1.9vw,1.3rem);color:var(--text-sec);max-width:52ch;margin-bottom:2.75rem;line-height:1.75}
@@ -84,7 +85,7 @@
     .form-error-link{color:var(--accent);text-decoration:underline;font-weight:500}
     /* BUTTONS */
     .btn-primary{display:inline-flex;align-items:center;gap:.625rem;background:var(--accent);color:#fff;font-size:1rem;font-weight:700;letter-spacing:.02em;padding:1rem 2rem;border-radius:8px;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;white-space:nowrap}
-    .btn-primary:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 12px 30px rgba(217,78,15,.40),0 0 0 1px rgba(217,78,15,.3)}
+    .btn-primary:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 12px 30px var(--accent-btn-glow),0 0 0 1px rgba(217,78,15,.3)}
     .btn-primary svg{transition:transform .2s}
     .btn-primary:hover svg{transform:translateX(4px)}
     .btn-ghost{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--text-sec);font-size:.95rem;font-weight:600;padding:1rem 2rem;border-radius:8px;border:1px solid var(--border-warm);text-decoration:none;cursor:pointer;transition:all .2s}
@@ -210,7 +211,7 @@
     select.field.has-value{color:var(--text-primary)}
     select.field option{background:#161412;color:var(--text-primary)}
     .form-submit{width:100%;padding:1.125rem;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;letter-spacing:.02em;cursor:pointer;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:background .2s,transform .2s,box-shadow .2s}
-    .form-submit:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 12px 30px rgba(217,78,15,.40)}
+    .form-submit:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 12px 30px var(--accent-btn-glow)}
     .form-disclaimer{font-size:.73rem;color:var(--text-muted);text-align:center;margin-top:1rem;line-height:1.6}
     .success-msg{display:none;text-align:center;padding:1.5rem 0}
     .success-msg.show{display:block}
@@ -316,6 +317,7 @@
   </script>
 </head>
 <body>
+<a href="#main" class="skip-link">Saltar al contenido</a>
 <div id="scroll-progress" aria-hidden="true"></div>
 
 <!-- NAV -->
@@ -332,7 +334,7 @@
   </button>
 </nav>
 
-<main>
+<main id="main">
 <!-- HERO -->
 <section id="hero">
   <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
@@ -405,7 +407,7 @@
       <a class="card" href="/carteleria-luminosa-rosario/">
         <picture>
           <source srcset="img/servicios/portada-luminosa.webp" type="image/webp">
-          <img src="img/servicios/portada-luminosa.jpg" alt="Cartel luminoso LED instalado en frente de local comercial en Rosario" class="card-img" loading="eager" fetchpriority="high">
+          <img src="img/servicios/portada-luminosa.jpg" alt="Cartel luminoso LED instalado en frente de local comercial en Rosario" class="card-img" width="800" height="533" loading="eager" fetchpriority="high">
         </picture>
         <div class="card-body">
           <div class="card-badge">Luminosa</div>
@@ -417,7 +419,7 @@
       <a class="card" href="/neon-led-rosario/">
         <picture>
           <source srcset="img/servicios/luminosa-15.webp" type="image/webp">
-          <img src="img/servicios/luminosa-15.jpg" alt="Cartel de neón LED personalizado para bar en Rosario" class="card-img" loading="lazy">
+          <img src="img/servicios/luminosa-15.jpg" alt="Cartel de neón LED personalizado para bar en Rosario" class="card-img" width="800" height="533" loading="lazy">
         </picture>
         <div class="card-body">
           <div class="card-badge">Neón LED</div>
@@ -429,7 +431,7 @@
       <a class="card" href="/letras-corporeas-rosario/">
         <picture>
           <source srcset="img/servicios/portada-corporeos.webp" type="image/webp">
-          <img src="img/servicios/portada-corporeos.jpg" alt="Letras corpóreas iluminadas con LED en fachada de negocio en Rosario" class="card-img" loading="lazy">
+          <img src="img/servicios/portada-corporeos.jpg" alt="Letras corpóreas iluminadas con LED en fachada de negocio en Rosario" class="card-img" width="800" height="533" loading="lazy">
         </picture>
         <div class="card-body">
           <div class="card-badge">Corpóreos</div>
@@ -441,7 +443,7 @@
       <a class="card" href="/senaletica-rosario/">
         <picture>
           <source srcset="img/servicios/portada-senaletica.webp" type="image/webp">
-          <img src="img/servicios/portada-senaletica.jpg" alt="Sistema de señalética corporativa en edificio de oficinas en Rosario" class="card-img" loading="lazy">
+          <img src="img/servicios/portada-senaletica.jpg" alt="Sistema de señalética corporativa en edificio de oficinas en Rosario" class="card-img" width="800" height="533" loading="lazy">
         </picture>
         <div class="card-body">
           <div class="card-badge">Señalética</div>
@@ -453,7 +455,7 @@
       <a class="card" href="/ploteo-vehicular-rosario/">
         <picture>
           <source srcset="img/servicios/portada-ploteo.webp" type="image/webp">
-          <img src="img/servicios/portada-ploteo.jpg" alt="Ploteo vehicular completo en flota comercial de empresa en Rosario" class="card-img" loading="lazy">
+          <img src="img/servicios/portada-ploteo.jpg" alt="Ploteo vehicular completo en flota comercial de empresa en Rosario" class="card-img" width="800" height="533" loading="lazy">
         </picture>
         <div class="card-body">
           <div class="card-badge">Vehicular</div>
@@ -465,7 +467,7 @@
       <a class="card" href="/cercos-obra-lonas-rosario/">
         <picture>
           <source srcset="img/servicios/portada-cercos.webp" type="image/webp">
-          <img src="img/servicios/portada-cercos.jpg" alt="Cerco de obra con lona impresa para constructora en Rosario" class="card-img" loading="lazy">
+          <img src="img/servicios/portada-cercos.jpg" alt="Cerco de obra con lona impresa para constructora en Rosario" class="card-img" width="800" height="533" loading="lazy">
         </picture>
         <div class="card-body">
           <div class="card-badge">Cercos · Lonas</div>
@@ -477,7 +479,7 @@
       <a class="card" href="/fachadas-comerciales-rosario/">
         <picture>
           <source srcset="img/servicios/portada-fachadas.webp" type="image/webp">
-          <img src="img/servicios/portada-fachadas.jpg" alt="Fachada comercial y frente de local renovado en Rosario" class="card-img" loading="lazy">
+          <img src="img/servicios/portada-fachadas.jpg" alt="Fachada comercial y frente de local renovado en Rosario" class="card-img" width="800" height="533" loading="lazy">
         </picture>
         <div class="card-body">
           <div class="card-badge">Fachadas</div>
@@ -489,7 +491,7 @@
       <a class="card" href="/arquitectura-comercial-rosario/">
         <picture>
           <source srcset="img/servicios/portada-arquitectura.webp" type="image/webp">
-          <img src="img/servicios/portada-arquitectura.jpg" alt="Diseño interior de local comercial a la calle en Rosario" class="card-img" loading="lazy">
+          <img src="img/servicios/portada-arquitectura.jpg" alt="Diseño interior de local comercial a la calle en Rosario" class="card-img" width="800" height="533" loading="lazy">
         </picture>
         <div class="card-body">
           <div class="card-badge">Arquitectura</div>
@@ -546,7 +548,7 @@
         <!-- Argentina map icon — silueta real recoloreada -->
         <div class="stat-box">
           <div class="argentina-icon">
-            <img src="img/logos/argentina.png" alt="Mapa de Argentina">
+            <img src="img/logos/argentina.png" alt="Mapa de Argentina" width="100" height="130" loading="lazy">
           </div>
           <div class="lbl">alcance nacional</div>
         </div>
@@ -570,31 +572,31 @@
   <div class="logos-track-outer">
     <div class="logos-track" id="logosTrack">
       <!-- Set 1 -->
-      <div class="logo-client"><img src="img/logos/camesa.png"         alt="Camesa"></div>
-      <div class="logo-client"><img src="img/logos/corona.png"         alt="Corona"></div>
-      <div class="logo-client"><img src="img/logos/bolsa-comercio.png" alt="Bolsa de Comercio Rosario"></div>
-      <div class="logo-client"><img src="img/logos/cofco.png"          alt="COFCO"></div>
-      <div class="logo-client"><img src="img/logos/patagonia.png"      alt="Patagonia"></div>
-      <div class="logo-client"><img src="img/logos/ldc.png"            alt="LDC"></div>
-      <div class="logo-client"><img src="img/logos/agrofy.png"         alt="Agrofy"></div>
-      <div class="logo-client"><img src="img/logos/michroma.png"       alt="Michroma"></div>
-      <div class="logo-client"><img src="img/logos/bei.png"            alt="BEI"></div>
-      <div class="logo-client"><img src="img/logos/fyo.png"            alt="FyO"></div>
-      <div class="logo-client"><img src="img/logos/exintrader.png"     alt="Exintrader"></div>
-      <div class="logo-client"><img src="img/logos/esther.png"         alt="Esther"></div>
+      <div class="logo-client"><img src="img/logos/camesa.png" width="120" height="52" loading="lazy" alt="Camesa"></div>
+      <div class="logo-client"><img src="img/logos/corona.png" width="120" height="52" loading="lazy" alt="Corona"></div>
+      <div class="logo-client"><img src="img/logos/bolsa-comercio.png" width="120" height="52" loading="lazy" alt="Bolsa de Comercio Rosario"></div>
+      <div class="logo-client"><img src="img/logos/cofco.png" width="120" height="52" loading="lazy" alt="COFCO"></div>
+      <div class="logo-client"><img src="img/logos/patagonia.png" width="120" height="52" loading="lazy" alt="Patagonia"></div>
+      <div class="logo-client"><img src="img/logos/ldc.png" width="120" height="52" loading="lazy" alt="LDC"></div>
+      <div class="logo-client"><img src="img/logos/agrofy.png" width="120" height="52" loading="lazy" alt="Agrofy"></div>
+      <div class="logo-client"><img src="img/logos/michroma.png" width="120" height="52" loading="lazy" alt="Michroma"></div>
+      <div class="logo-client"><img src="img/logos/bei.png" width="120" height="52" loading="lazy" alt="BEI"></div>
+      <div class="logo-client"><img src="img/logos/fyo.png" width="120" height="52" loading="lazy" alt="FyO"></div>
+      <div class="logo-client"><img src="img/logos/exintrader.png" width="120" height="52" loading="lazy" alt="Exintrader"></div>
+      <div class="logo-client"><img src="img/logos/esther.png" width="120" height="52" loading="lazy" alt="Esther"></div>
       <!-- Set 2 — duplicado para loop seamless -->
-      <div class="logo-client" aria-hidden="true"><img src="img/logos/camesa.png"         alt=""></div>
-      <div class="logo-client" aria-hidden="true"><img src="img/logos/corona.png"         alt=""></div>
-      <div class="logo-client" aria-hidden="true"><img src="img/logos/bolsa-comercio.png" alt=""></div>
-      <div class="logo-client" aria-hidden="true"><img src="img/logos/cofco.png"          alt=""></div>
-      <div class="logo-client" aria-hidden="true"><img src="img/logos/patagonia.png"      alt=""></div>
-      <div class="logo-client" aria-hidden="true"><img src="img/logos/ldc.png"            alt=""></div>
-      <div class="logo-client" aria-hidden="true"><img src="img/logos/agrofy.png"         alt=""></div>
-      <div class="logo-client" aria-hidden="true"><img src="img/logos/michroma.png"       alt=""></div>
-      <div class="logo-client" aria-hidden="true"><img src="img/logos/bei.png"            alt=""></div>
-      <div class="logo-client" aria-hidden="true"><img src="img/logos/fyo.png"            alt=""></div>
-      <div class="logo-client" aria-hidden="true"><img src="img/logos/exintrader.png"     alt=""></div>
-      <div class="logo-client" aria-hidden="true"><img src="img/logos/esther.png"         alt=""></div>
+      <div class="logo-client" aria-hidden="true"><img src="img/logos/camesa.png" width="120" height="52" loading="lazy" alt=""></div>
+      <div class="logo-client" aria-hidden="true"><img src="img/logos/corona.png" width="120" height="52" loading="lazy" alt=""></div>
+      <div class="logo-client" aria-hidden="true"><img src="img/logos/bolsa-comercio.png" width="120" height="52" loading="lazy" alt=""></div>
+      <div class="logo-client" aria-hidden="true"><img src="img/logos/cofco.png" width="120" height="52" loading="lazy" alt=""></div>
+      <div class="logo-client" aria-hidden="true"><img src="img/logos/patagonia.png" width="120" height="52" loading="lazy" alt=""></div>
+      <div class="logo-client" aria-hidden="true"><img src="img/logos/ldc.png" width="120" height="52" loading="lazy" alt=""></div>
+      <div class="logo-client" aria-hidden="true"><img src="img/logos/agrofy.png" width="120" height="52" loading="lazy" alt=""></div>
+      <div class="logo-client" aria-hidden="true"><img src="img/logos/michroma.png" width="120" height="52" loading="lazy" alt=""></div>
+      <div class="logo-client" aria-hidden="true"><img src="img/logos/bei.png" width="120" height="52" loading="lazy" alt=""></div>
+      <div class="logo-client" aria-hidden="true"><img src="img/logos/fyo.png" width="120" height="52" loading="lazy" alt=""></div>
+      <div class="logo-client" aria-hidden="true"><img src="img/logos/exintrader.png" width="120" height="52" loading="lazy" alt=""></div>
+      <div class="logo-client" aria-hidden="true"><img src="img/logos/esther.png" width="120" height="52" loading="lazy" alt=""></div>
     </div>
   </div>
 </section>
