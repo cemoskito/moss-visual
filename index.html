@@ -64,8 +64,8 @@
     .nav-links{display:flex;align-items:center;gap:2rem}
     .nav-links a{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-sec);text-decoration:none;transition:color .2s;padding:.75rem 0;display:inline-flex;align-items:center}
     .nav-links a:hover{color:var(--text-primary)}.nav-links a.active{color:var(--accent);position:relative}.nav-links a.active::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:2px;background:var(--accent);border-radius:1px}
-    .nav-links a.nav-cta,.nav-cta{background:var(--accent);color:#f4f2ee!important;font-size:.85rem;font-weight:700;letter-spacing:.02em;padding:.65rem 1.4rem;border-radius:6px;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;text-transform:none}
-    .nav-links a.nav-cta:hover,.nav-cta:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 6px 20px var(--accent-glow);color:#f4f2ee!important}
+    .nav-links a.nav-cta,.nav-cta{background:var(--accent);color:#0a0a0a!important;font-size:.85rem;font-weight:700;letter-spacing:.02em;padding:.65rem 1.4rem;border-radius:6px;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;text-transform:none}
+    .nav-links a.nav-cta:hover,.nav-cta:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 6px 20px var(--accent-glow);color:#0a0a0a!important}
     .nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
     .nav-hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);margin:5px 0;transition:all .3s}
 
@@ -231,7 +231,7 @@
     .footer-copy{font-size:.8rem;color:var(--text-muted);line-height:1.7}
     .footer-copy a{color:var(--text-muted);text-decoration:none;transition:color .2s;padding:.35rem 0;display:inline-block}
     .footer-copy a:hover{color:var(--accent)}
-    .footer-links{display:flex;gap:2rem}
+    .footer-links{display:flex;gap:2rem;flex-wrap:wrap}
     .footer-links a{font-size:.8rem;color:var(--text-muted);text-decoration:none;transition:color .2s;padding:.55rem 0;display:inline-block}
     .footer-links a:hover{color:var(--text-primary)}
 
@@ -241,10 +241,11 @@
     @media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}.stat-item{padding:1.25rem 1rem;border-right:none!important;border-bottom:1px solid var(--border)}.stat-item:nth-child(3),.stat-item:nth-child(4){border-bottom:none}.diferencial-stats{grid-template-columns:1fr 1fr}.form-card{padding:1.75rem 1.25rem}.footer-inner{flex-direction:column;text-align:center}.footer-links{justify-content:center}.logos-grid{gap:1.75rem 2rem}.cta-mid-actions{flex-direction:column;align-items:center}}
 
     /* STICKY MOBILE CTA — Agente 3 */
-    #stickyCTA{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg-primary);padding:10px 16px;z-index:9999;box-shadow:0 -2px 12px rgba(0,0,0,.35);border-top:1px solid var(--border)}
-    #stickyCTA a{display:flex;align-items:center;justify-content:center;width:100%;padding:13px 20px;background:var(--accent);color:#f4f2ee;font-size:.95rem;font-weight:700;text-decoration:none;border-radius:8px;letter-spacing:.01em;transition:background .2s}
+    #stickyCTA{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg-primary);padding:8px 12px;z-index:9999;box-shadow:0 -2px 12px rgba(0,0,0,.35);border-top:1px solid var(--border)}
+    #stickyCTA a{display:flex;align-items:center;justify-content:center;width:100%;padding:11px 16px;background:var(--accent);color:#0a0a0a;font-size:.9rem;font-weight:700;text-decoration:none;border-radius:8px;letter-spacing:.01em;transition:background .2s}
     #stickyCTA a:hover{background:var(--accent-hover)}
-    @media(max-width:768px){#stickyCTA{display:block}body{padding-bottom:68px}}
+    #mapa .section-eyebrow::before,#cta-midpage .section-eyebrow::before{display:none}
+    @media(max-width:768px){#stickyCTA{display:block}body{padding-bottom:62px;overflow-x:hidden}}
 
   /* ═══════════════════════════════════════════
      TRACK E — UX & ANIMACIONES (Fase 3)
