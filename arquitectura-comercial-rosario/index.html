@@ -165,7 +165,21 @@
   @media(max-width:768px){.nav-links.open a:not(.nav-cta){padding:.75rem 0;display:block}.nav-links.open .nav-cta{padding:.875rem 1.4rem;display:block;text-align:center}}
     @media(max-width:768px){.field{font-size:1rem}}
     .btn-primary:focus-visible,.btn-ghost:focus-visible,.form-submit:focus-visible,.nav-links a:focus-visible,.nav-cta:focus-visible,.nav-hamburger:focus-visible,.faq-question:focus-visible,.gallery-toggle:focus-visible,.lb-nav:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-    </style>
+    
+/* Cross-links section */
+.related-services{padding:4rem clamp(1rem,5vw,4rem);background:var(--bg-secondary);border-top:1px solid var(--border)}
+.related-services .section-eyebrow{text-align:center;margin-bottom:.5rem}
+.related-services h2{text-align:center;font-size:clamp(1.4rem,3vw,1.8rem);margin-bottom:2rem;color:var(--text-primary)}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;max-width:960px;margin:0 auto}
+.related-card{background:var(--bg-primary);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-decoration:none;color:var(--text-primary);transition:border-color .25s,transform .25s}
+.related-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.related-card h3{font-size:1.05rem;font-weight:700;margin-bottom:.35rem;display:flex;align-items:center;gap:.5rem}
+.related-card p{font-size:.85rem;color:var(--text-muted);line-height:1.5;margin-bottom:.75rem}
+.related-card .card-arrow{font-size:.8rem;color:var(--accent);font-weight:600;display:flex;align-items:center;gap:.35rem}
+.related-card .card-arrow svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.related-card:hover .card-arrow svg{transform:translateX(3px)}
+
+</style>
 </head>
 <body>
 
