@@ -2,25 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mossvisual.com/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://mossvisual.com/carteleria-luminosa-rosario/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mossvisual.com/ploteo-vidrieras-rosario/</loc>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://mossvisual.com/letras-corporeas-rosario/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://mossvisual.com/letras-polifan-telgopor-rosario/</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mossvisual.com/senaletica-rosario/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -32,7 +44,7 @@
   </url>
   <url>
     <loc>https://mossvisual.com/fachadas-comerciales-rosario/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -44,13 +56,13 @@
   </url>
   <url>
     <loc>https://mossvisual.com/cercos-obra-lonas-rosario/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://mossvisual.com/neon-led-rosario/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
