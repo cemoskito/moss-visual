@@ -1,4 +1,4 @@
-# MOSS Visual — Configuración de rastreo para buscadores
+# MOSS Visual - Configuración de rastreo para buscadores
 # Optimizado para Google, Bing y otros crawlers
 
 User-agent: *
