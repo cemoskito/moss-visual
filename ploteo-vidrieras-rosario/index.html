@@ -637,6 +637,7 @@ if(diagForm){
   var floatBtn=document.querySelector('.wa-float'); if(floatBtn){floatBtn.href=url;}
   var bar=document.getElementById('stickyCTA');
   if(bar){
+    var orig=bar.querySelector('a'); if(orig){orig.textContent='Cotizá gratis →';}
     var wa=document.createElement('a');
     wa.className='sticky-wa'; wa.href=url; wa.target='_blank'; wa.rel='noopener';
     wa.setAttribute('aria-label','Escribinos por WhatsApp');
