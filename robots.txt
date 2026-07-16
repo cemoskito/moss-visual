@@ -12,9 +12,5 @@ Allow: /*.js
 Allow: /*.css
 Allow: /img/
 
-# Directivas de rastreo
-Crawl-delay: 2
-Request-rate: 30/60
-
 # Sitemap
 Sitemap: https://mossvisual.com/sitemap.xml

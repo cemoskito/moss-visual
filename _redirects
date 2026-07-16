@@ -1,9 +1,12 @@
-# MOSS Visual — Redirecciones 301 Netlify
-# Actualizado: 2026-05-06
-# Cambios: eliminados redirects a hash fragments (causaban cadenas y contaminación en GSC)
-#          service redirects apuntan ahora a landing pages dedicadas
+# MOSS Visual - Redirecciones Netlify
+# Actualizado: 2026-06-22
+# Cambios: eliminado fallback SPA (creaba soft-404 en todo el sitio),
+#          eliminada regla regex no soportada, agregado 301 netlify.app -> dominio
 
-# ===== PATHS VIEJOS → HOMEPAGE =====
+# ===== SUBDOMINIO NETLIFY -> DOMINIO PRINCIPAL =====
+https://mossvisual.netlify.app/* https://mossvisual.com/:splat 301!
+
+# ===== PATHS VIEJOS -> HOMEPAGE =====
 /contact              /                    301
 /home                 /                    301
 /mossvisual           /                    301
@@ -11,17 +14,11 @@
 /localscan            /                    301
 /planes               /                    301
 /contacto             /                    301
-/nosotros             /                    301
+/nosotros             /quienes-somos/      301
 
-# ===== SERVICIOS VIEJOS → LANDING PAGES =====
+# ===== SERVICIOS VIEJOS -> LANDING PAGES =====
 /letras-corporeas     /letras-corporeas-rosario/     301
 /fachadas-comerciales /fachadas-comerciales-rosario/ 301
 /carteleria-luminosa  /carteleria-luminosa-rosario/  301
 /senaletica           /senaletica-rosario/           301
 /ploteo-vehicular     /ploteo-vehicular-rosario/     301
-
-# ===== NORMALIZAR TRAILING SLASHES =====
-/(.*)/$               /$1                  301
-
-# ===== FALLBACK SPA =====
-/*                    /index.html          200
