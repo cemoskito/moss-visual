@@ -1,5 +1,5 @@
 # MOSS Visual - Redirecciones Netlify
-# Actualizado: 2026-06-22
+# Actualizado: 2026-07-16
 # Cambios: eliminado fallback SPA (creaba soft-404 en todo el sitio),
 #          eliminada regla regex no soportada, agregado 301 netlify.app -> dominio
 
